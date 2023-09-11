@@ -31,8 +31,8 @@ a:hover {
 .bingo-board {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    width: 75vw; /* Set the container width */
-    height: 85vh; /* Set the container height */
+    width: 95vw; /* Set the container width */
+    height: 95vh; /* Set the container height */
 }
 
 
@@ -55,7 +55,6 @@ a:hover {
     justify-content: center;
     border: 2px solid #00ff004e;
     background-color: rgba(0, 0, 0, 0.5);
-    height: 17vh;
 }
 .bingo-board > div:hover {
     background-color: rgba(0, 255, 0, 0.291);
