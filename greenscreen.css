@@ -1,0 +1,114 @@
+
+/* Reset some default styles for better control */
+body {
+    margin: 10px;
+    padding: 10px;
+    font-family: 'Green Screen', sans-serif;
+    background-image: url("https://media.istockphoto.com/id/1397842925/vector/abstract-striped-lined-horizontal-glowing-background.jpg?s=612x612&w=0&k=20&c=IPHWnDu25X5H5x1pgJQ5j_51448GeI637YQFdXbnN9Q=");
+    background-size: 0.3;
+    background-repeat: repeat;
+    background-position: top left;
+    background-blend-mode: multiply;
+    background-color: #0000007b;
+    color: #00ff0087; /* Green text */
+}
+
+/* Apply a glowing text effect */
+.text {
+    text-shadow: 0 0 60px #00ff00b0, 0 0 60px #00ff00b0, 0 0 60px #00ff00b0;
+}
+
+/* Style links */
+a {
+    color: #00FF00;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #00ff009b;
+}
+
+.bingo-board {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 75vw; /* Set the container width */
+    height: 85vh; /* Set the container height */
+}
+
+
+.bingo-board > div {
+    transition: all 0.23s ease-out;
+    text-shadow: 2px 1px 2px #000000;
+    vertical-align: middle;
+    margin:0px;    
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-image: none;
+    cursor: pointer;
+    text-align: center;
+    font-weight: 100;
+    font-size: clamp(15px, 2.5vw, 2.5vh);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #00ff004e;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 17vh;
+}
+.bingo-board > div:hover {
+    background-color: rgba(0, 255, 0, 0.291);
+    
+}
+
+.bingo-board > div.active {
+    text-shadow: 10px 0px 10px #000, -10px 0px 10px #000, 0px 10px 10px #000, 0px -10px 10px #000;
+    box-shadow: inset 0px 0px 30px #00FF00, 0px 0px 30px #00FF00;
+    background-color:#00FF00;
+    border:2px #00FF00 solid;
+    color:#00FF00;
+  }
+  .bingo-board > div.active div.text { opacity:1; }
+  
+  
+  
+  
+  @media screen and (max-width:1024px){
+    
+    .bingo-board { 
+      width:95vw;
+      height:95vh;
+      margin:0 auto;
+      border-radius: 0px;
+    }
+    .bingo-board > div {
+      font-weight:600;
+    }
+    .content {
+      padding:0 0 10px 0px !important;
+    }
+    .left-frame, .bar-panel, .corner-bg {
+      display:none;
+    }
+  }
+  
+  @media screen and (max-width:768px){
+    
+    .bingo-board > div:focus, .bingo-board >  div:hover, .bingo-board > div:active { background-color:rgba(11,11,11,0.9); outline: none;}
+  
+    .bingo-board {
+      height:90vh;
+    }
+    .left-frame {
+      width:30px;
+      min-width:30px;
+    }
+    .right-frame {
+      width:auto;
+    }
+    .content {
+      padding:10px;
+    }
+  
+  }
