@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<!-- Shamelessly, overtly, and clumsily stolen from the great jP00p's Star Trek Bingo.
+Thanks to those who ran so I could stumble. -->
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>X-Files Bingo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Impact&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.cdnfonts.com/css/green-screen" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="greenscreen.css">
+</head>
+<body id="stretch">
+
+<div class="wrap" id="gap">
+    <div class="left-frame galaxy" id="short">
+        <div>
+            <div class="panel-3 galaxy"><span class="hop"></span></div>
+            <div class="sidebar-buttons">
+                <br>
+                <a class="green" href="#" onclick="window.location.reload();">New board</a>
+                <br>
+                <br>
+            </div>
+            <div class="panel-4 gray"><span class="hop"></span></div>
+            <div class="panel-5 sky"><span class="hop"></span></div>
+        </div>
+    </div>
+
+        <div class="content">
+            <div class="bingo-board">
+                <!-- Replace these cells with your X-Files-themed objectives -->
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell" id="free">
+                    <div class="text">Free Space</div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+    var api_key = "FR57D8JH3LYH";
+    var search_terms = [
+        "Mulder",
+        "Scully",
+        "Alien",
+        "Cigarette Smoking Man",
+        "Creepy",
+        "Truth",
+        "Skinner",
+        "Mulder-and-Scully",
+
+        // Add more relevant search terms here
+    ];
+
+    var stuff = [
+    'Bat signal!',
+    '"Mulder it\'s me"',
+    '"Scully it\'s me"',
+    'Lone Gunmen appear',
+    'Lab tech gets his heart broken',
+    'Out of place industrial hallways',
+    'Main character gets shot',
+    'Field report voice over',
+    'Scully believes!',
+    'Scully does an autopsy',
+    'We\'re in a hospital',
+    'We\'re in a jail',
+    'Cancer Man is ominous',
+    'Cancer Man brags',
+    'It\'s raining',
+    'Cemetary',
+    'Hey, that\'s just Vancouver!',
+    '"Stop, Federal Agent!"',
+    'We\'re in this alone',
+    'Yum, sunflower seeds',
+    'Skinner chews out Mulder',
+    'Skinner chews out Scully',
+    'Skinner\'s on our side',
+    'Terrible CGI',
+    '"The truth"',
+    '"Believe"',
+    '"Spooky Mulder"',
+    'Mulder loses his cool',
+    'Vaguely racist 90s tropes',
+    'Scully misses vital paranormal moment',
+    '"I\'m telling you Scully"',
+    'Literal aliens',
+    'Running or out for a run',
+    'Mulder smokes someone',
+    'Scully smokes someone',
+    'Chasing a car on foot',
+    'Flirty Mulder',
+    'Episode gets sexy',
+    'Why are you by yourself!?',
+    'Mulder doesn\'t believe',
+    'Mulder jumps to conclusions',
+    'Zoom and enhance',
+    'Hacking',
+    'Lights are left off for some reason',
+    'Someone doesn\'t trust a phone line',
+    'Scully talks about science',
+    '"I\'m a doctor"',
+    'The Syndicate',
+    'Unresolved sexual tension',
+    '"Are you suggesting..."',
+    'Flashin\' a badge',
+    'Tench coat chic',
+    'A foreign language is spoken',
+    'Nightmare fuel',
+    'Mulder mentions Samantha',
+    'Someone\'s parents show up',
+    'Panflutes',
+    'Someone is abducted',
+    'Fight!',
+    'Alley way',
+    'Bad guy is after a main character',
+    'Main character dies',
+    'Episode isn\'t paranormal',
+    'Monster of the week',
+    'Scully needs to fly somewhere',
+    'Mulder needs to fly somewhere',
+    'Threat goes unresolved',
+    'Mulder is funny',
+    'Scully is funny',
+    'Someone is a total creep',
+    '*screams*',
+    'Religious overtones',
+    'Overt government conspiracy',
+    'Humans are the real monsters',
+    'Mulder is lovin\' it',
+    'This would flip science on its head',
+    'Psychic powers',
+    'Episode gets funnyweird',
+    'A meaningful look',
+    'Local police are useless',
+
+    ];
+
+    document.addEventListener("DOMContentLoaded", function(){
+
+        var cells = document.querySelectorAll('.bingo-board > div:not(#free) > div.text');
+        cells.forEach(function(cell){
+            pick = Math.floor(Math.random()*stuff.length);
+            cell.innerHTML = stuff[pick];
+            stuff.splice(pick, 1);
+        })
+
+        var allcells = document.querySelectorAll('.bingo-board > div')
+        allcells.forEach(function(cell){
+
+            cell.addEventListener('click', function(e){
+
+                e.preventDefault();
+
+                var toggle = this.style;
+                var search_url = "https://api.tenor.com/v1/random?q=" + search_terms[Math.floor(Math.random()*search_terms.length)] + " x-files&key=" + api_key + "&limit=5&contentfilter=off&locale=en_US";
+
+                if(cell.classList.contains("active")){
+                    cell.classList.remove("active")
+                    toggle.backgroundImage = "none";
+                } else {
+                    cell.classList.add("active")
+                    fetch(search_url)
+                        .then(data => data.json())
+                        .then(data => {
+                            toggle.backgroundImage = "url("+data.results[Math.floor(Math.random()*data.results.length)].media[0].tinygif.url+")";
+                        })
+                }
+            });
+        });
+
+        const event = new MouseEvent('click', {
+            view: window,
+            bubbles: true,
+            cancelable: true
+        });
+
+        document.getElementById("free").dispatchEvent(event);
+    });
+
+</script>
+</body>
+</html>
