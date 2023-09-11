@@ -1,6 +1,4 @@
-html,body { overflow: hidden; }
 
-.content { height:100vh; }
 
 /* Reset some default styles for better control */
 body {
@@ -58,6 +56,7 @@ a:hover {
     justify-content: center;
     border: 2px solid #00ff004e;
     background-color: rgba(0, 0, 0, 0.5);
+    white-space: normal;
 }
 .bingo-board > div:hover {
     background-color: rgba(0, 255, 0, 0.291);
