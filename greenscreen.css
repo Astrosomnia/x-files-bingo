@@ -1,7 +1,7 @@
 
 /* Reset some default styles for better control */
 body {
-    margin: 10px;
+    margin: 0px;
     padding: 10px;
     font-family: 'Green Screen', sans-serif;
     background-image: url("https://media.istockphoto.com/id/1397842925/vector/abstract-striped-lined-horizontal-glowing-background.jpg?s=612x612&w=0&k=20&c=IPHWnDu25X5H5x1pgJQ5j_51448GeI637YQFdXbnN9Q=");
@@ -49,7 +49,7 @@ a:hover {
     text-align: center;
     font-weight: 100;
     font-size: clamp(15px, 2.5vw, 2.5vh);
-    overflow: hidden;
+    overflow: visible;
     display: flex;
     align-items: center;
     justify-content: center;
