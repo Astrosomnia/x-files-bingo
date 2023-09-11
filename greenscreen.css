@@ -1,5 +1,4 @@
 
-
 /* Reset some default styles for better control */
 body {
     margin: 0px;
@@ -49,7 +48,7 @@ a:hover {
     cursor: pointer;
     text-align: center;
     font-weight: 100;
-    font-size: clamp(14px, 2.5vw, 2.5vh);
+    font-size: clamp(11px, 2vw, 3.1vh);
     overflow: hidden;
     display: flex;
     align-items: center;
