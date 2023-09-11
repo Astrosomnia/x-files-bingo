@@ -1,115 +1,257 @@
+<!DOCTYPE html>
+<!-- Shamelessly, overtly, and clumsily ripped off from the great jP00p's Star Trek Bingo.
+Thanks to those who ran so I could stumble. -->
 
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>X-Files Bingo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Impact&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.cdnfonts.com/css/green-screen" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="greenscreen.css">
+</head>
+<body id="stretch">
 
-/* Reset some default styles for better control */
-body {
-    margin: 0px;
-    padding: 10px;
-    font-family: 'Green Screen', sans-serif;
-    background-image: url("https://media.istockphoto.com/id/1397842925/vector/abstract-striped-lined-horizontal-glowing-background.jpg?s=612x612&w=0&k=20&c=IPHWnDu25X5H5x1pgJQ5j_51448GeI637YQFdXbnN9Q=");
-    background-size: 0.3;
-    background-repeat: repeat;
-    background-position: top left;
-    background-blend-mode: multiply;
-    background-color: #0000007b;
-    color: #00ff0087; /* Green text */
-}
+<div class="wrap" id="gap">
+        <div>
+                <br>
+                <a class="green" href="#" onclick="window.location.reload();">New board</a>
+                <br>
+                <br>
+    </div>
 
-/* Apply a glowing text effect */
-.text {
-    text-shadow: 0 0 60px #00ff00b0, 0 0 60px #00ff00b0, 0 0 60px #00ff00b0;
-}
+        <div class="content">
+            <div class="bingo-board">
+                <!-- Replace these cells with your X-Files-themed objectives -->
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell" id="free">
+                    <div class="text">Free Space</div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                <div class="cell">
+                    <div class="text"></div>
+                </div>
+                </div>
 
-/* Style links */
-a {
-    color: #00FF00;
-    text-decoration: underline;
-}
+            </div>
+        </div>
 
-a:hover {
-    color: #00ff009b;
-}
+    </div>
+</div>
 
-.bingo-board {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    width: 95vw; /* Set the container width */
-    height: 95vh; /* Set the container height */
-}
+<script>
 
+    var api_key = "FR57D8JH3LYH";
+    var search_terms = [
+        "Mulder",
+        "Scully",
+        "Alien",
+        "Cigarette Smoking Man",
+        "Creepy",
+        "Truth",
+        "Skinner",
+        "Mulder-and-Scully",
+        "Spooky",
 
-.bingo-board > div {
-    transition: all 0.23s ease-out;
-    text-shadow: 2px 1px 2px #000000;
-    vertical-align: middle;
-    margin:0px;    
-    background-size: cover !important;
-    background-repeat: no-repeat !important;
-    background-position: center center !important;
-    background-image: none;
-    cursor: pointer;
-    text-align: center;
-    font-weight: 100;
-    font-size: clamp(14px, 2.5vw, 2.5vh);
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid #00ff004e;
-    background-color: rgba(0, 0, 0, 0.5);
-    white-space: normal;
-}
-.bingo-board > div:hover {
-    background-color: rgba(0, 255, 0, 0.291);
-    
-}
+        // Add more relevant search terms here
+    ];
 
-.bingo-board > div.active {
-    text-shadow: 10px 0px 10px #000, -10px 0px 10px #000, 0px 10px 10px #000, 0px -10px 10px #000;
-    box-shadow: inset 0px 0px 30px #00FF00, 0px 0px 30px #00FF00;
-    background-color:#00FF00;
-    border:2px #00FF00 solid;
-    color:#00FF00;
-  }
-  .bingo-board > div.active div.text { opacity:1; }
-  
-  
-  
-  
-  @media screen and (max-width:1024px){
-    
-    .bingo-board { 
-      width:95vw;
-      height:95vh;
-      margin:0 auto;
-      border-radius: 0px;
-    }
-    .bingo-board > div {
-      font-weight:600;
-    }
-    .content {
-      padding:0 0 10px 0px !important;
-    }
-    .left-frame, .bar-panel, .corner-bg {
-      display:none;
-    }
-  }
-  
-  @media screen and (max-width:768px){
-    
-    .bingo-board > div:focus, .bingo-board >  div:hover, .bingo-board > div:active { background-color:rgba(11,11,11,0.9); outline: none;}
-  
-    .bingo-board {
-      height:90vh;
-    }
-    .left-frame {
-      width:30px;
-      min-width:30px;
-    }
-    .right-frame {
-      width:auto;
-    }
-    .content {
-      padding:10px;
-    }
-  
-  }
+    var stuff = [
+    'Bat signal!',
+    '"Mulder it\'s me"',
+    '"Scully it\'s me"',
+    'Lone Gunmen appear',
+    'Lab tech gets his heart broken',
+    'Out of place industrial hallways',
+    'Main character gets shot',
+    'Field report voice over',
+    'Scully believes!',
+    'Scully does an autopsy',
+    'We\'re in a hospital',
+    'We\'re in a jail',
+    'Cancer Man is ominous',
+    'Cancer Man brags',
+    'It\'s raining',
+    'Cemetary',
+    'Hey, that\'s just Vancouver!',
+    '"Stop, Federal Agent!"',
+    'We\'re in this alone',
+    'Yum, sunflower seeds',
+    'Skinner chews out Mulder',
+    'Skinner chews out Scully',
+    'Skinner\'s on our side',
+    'Terrible CGI',
+    '"The truth"',
+    '"Believe"',
+    '"Spooky Mulder"',
+    'Mulder loses his cool',
+    'Vaguely racist 90s tropes',
+    'Scully misses vital paranormal moment',
+    '"I\'m telling you Scully"',
+    'Literal aliens',
+    'Running or out for a run',
+    'Mulder smokes someone',
+    'Scully smokes someone',
+    'Chasing a car on foot',
+    'Flirty Mulder',
+    'Episode gets sexy',
+    'Why are you by yourself!?',
+    'Mulder doesn\'t believe',
+    'Mulder jumps to conclusions',
+    'Zoom and enhance',
+    'Hacking',
+    'Lights are left off for some reason',
+    'Someone doesn\'t trust a phone line',
+    'Scully talks about science',
+    '"I\'m a doctor"',
+    'The Syndicate',
+    'Unresolved sexual tension',
+    '"Are you suggesting..."',
+    'Flashin\' a badge',
+    'Tench coat chic',
+    'A foreign language is spoken',
+    'Nightmare fuel',
+    'Mulder mentions Samantha',
+    'Someone\'s parents show up',
+    'Panflutes',
+    'Someone is abducted',
+    'Fight!',
+    'Alley way',
+    'Bad guy is after a main character',
+    'Main character dies',
+    'Episode isn\'t paranormal',
+    'Monster of the week',
+    'Scully needs to fly somewhere',
+    'Mulder needs to fly somewhere',
+    'Threat goes unresolved',
+    'Mulder is funny',
+    'Scully is funny',
+    'Someone is a total creep',
+    '*screams*',
+    'Religious overtones',
+    'Overt government conspiracy',
+    'Humans are the real monsters',
+    'Mulder is lovin\'it',
+    'This would flip science on its head',
+    'Psychic powers',
+    'Episode gets funnyweird',
+    'A meaningful look',
+    'Local police are useless',
+
+    ];
+
+    document.addEventListener("DOMContentLoaded", function(){
+
+        var cells = document.querySelectorAll('.bingo-board > div:not(#free) > div.text');
+        cells.forEach(function(cell){
+            pick = Math.floor(Math.random()*stuff.length);
+            cell.innerHTML = stuff[pick];
+            stuff.splice(pick, 1);
+        })
+
+        var allcells = document.querySelectorAll('.bingo-board > div')
+        allcells.forEach(function(cell){
+
+            cell.addEventListener('click', function(e){
+
+                e.preventDefault();
+
+                var toggle = this.style;
+                var search_url = "https://api.tenor.com/v1/random?q=" + search_terms[Math.floor(Math.random()*search_terms.length)] + " x-files&key=" + api_key + "&limit=5&contentfilter=off&locale=en_US";
+
+                if(cell.classList.contains("active")){
+                    cell.classList.remove("active")
+                    toggle.backgroundImage = "none";
+                } else {
+                    cell.classList.add("active")
+                    fetch(search_url)
+                        .then(data => data.json())
+                        .then(data => {
+                            toggle.backgroundImage = "url("+data.results[Math.floor(Math.random()*data.results.length)].media[0].tinygif.url+")";
+                        })
+                }
+            });
+        });
+
+        const event = new MouseEvent('click', {
+            view: window,
+            bubbles: true,
+            cancelable: true
+        });
+
+        document.getElementById("free").dispatchEvent(event);
+    });
+
+</script>
+</body>
+</html>
