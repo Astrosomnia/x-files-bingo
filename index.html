@@ -108,6 +108,15 @@ Thanks to those who ran so I could stumble. -->
     </div>
 </div>
 
+<div id="bingo-popup" class="popup">
+    <div class="popup-content">
+        <span id="close-popup" class="close-icon">X</span>
+                <img id="bingo-gif" src="https://i.giphy.com/l41lUuodE6OmD0yGs.gif" alt="Bingo Celebration">
+        <h1>Bingo!</h1>
+    </div>
+</div>
+
+
 <script>
 
     var api_key = "FR57D8JH3LYH";
@@ -232,47 +241,111 @@ Thanks to those who ran so I could stumble. -->
     'CUT TO: Gun close-up',
     ];
 
-    document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function() {
+    var triggeredBingos = { rows: [], columns: [], diagonals: [] }; // Tracks completed lines
 
-        var cells = document.querySelectorAll('.bingo-board > div:not(#free) > div.text');
-        cells.forEach(function(cell){
-            pick = Math.floor(Math.random()*stuff.length);
-            cell.innerHTML = stuff[pick];
-            stuff.splice(pick, 1);
-        })
-
-        var allcells = document.querySelectorAll('.bingo-board > div')
-        allcells.forEach(function(cell){
-
-            cell.addEventListener('click', function(e){
-
-                e.preventDefault();
-
-                var toggle = this.style;
-                var search_url = "https://api.tenor.com/v1/random?q=" + search_terms[Math.floor(Math.random()*search_terms.length)] + " x-files&key=" + api_key + "&limit=5&contentfilter=off&locale=en_US";
-
-                if(cell.classList.contains("active")){
-                    cell.classList.remove("active")
-                    toggle.backgroundImage = "none";
-                } else {
-                    cell.classList.add("active")
-                    fetch(search_url)
-                        .then(data => data.json())
-                        .then(data => {
-                            toggle.backgroundImage = "url("+data.results[Math.floor(Math.random()*data.results.length)].media[0].tinygif.url+")";
-                        })
-                }
-            });
-        });
-
-        const event = new MouseEvent('click', {
-            view: window,
-            bubbles: true,
-            cancelable: true
-        });
-
-        document.getElementById("free").dispatchEvent(event);
+    var cells = document.querySelectorAll('.bingo-board > div:not(#free) > div.text');
+    cells.forEach(function(cell) {
+        let pick = Math.floor(Math.random() * stuff.length);
+        cell.innerHTML = stuff[pick];
+        stuff.splice(pick, 1);
     });
+
+    var allcells = document.querySelectorAll('.bingo-board > div');
+    allcells.forEach(function(cell) {
+        cell.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            var toggle = this.style;
+            var search_url = "https://api.tenor.com/v1/random?q=" + search_terms[Math.floor(Math.random() * search_terms.length)] + " x-files&key=" + api_key + "&limit=5&contentfilter=off&locale=en_US";
+
+            if (cell.classList.contains("active")) {
+                cell.classList.remove("active");
+                toggle.backgroundImage = "none";
+            } else {
+                cell.classList.add("active");
+                fetch(search_url)
+                    .then(data => data.json())
+                    .then(data => {
+                        toggle.backgroundImage = "url(" + data.results[Math.floor(Math.random() * data.results.length)].media[0].tinygif.url + ")";
+                    });
+                checkForBingo(); // Check for bingo after marking a cell as active
+            }
+        });
+    });
+
+document.getElementById("close-popup").addEventListener("click", function() {
+    document.getElementById("bingo-popup").style.display = "none";
+});
+
+
+    // Function to check for bingo
+    function checkForBingo() {
+        const board = Array.from(document.querySelectorAll('.bingo-board > div'));
+        const size = 5; // 5x5 board
+
+        // Check rows and columns
+        for (let i = 0; i < size; i++) {
+            // Check row
+            if (
+                board
+                    .slice(i * size, (i + 1) * size)
+                    .every(cell => cell.classList.contains('active')) &&
+                !triggeredBingos.rows.includes(i)
+            ) {
+                triggeredBingos.rows.push(i);
+                showBingoPopup();
+                return;
+            }
+            // Check column
+            if (
+                board
+                    .filter((_, index) => index % size === i)
+                    .every(cell => cell.classList.contains('active')) &&
+                !triggeredBingos.columns.includes(i)
+            ) {
+                triggeredBingos.columns.push(i);
+                showBingoPopup();
+                return;
+            }
+        }
+
+        // Check diagonals
+        if (
+            [0, 6, 12, 18, 24].every(index => board[index].classList.contains('active')) &&
+            !triggeredBingos.diagonals.includes("main")
+        ) {
+            triggeredBingos.diagonals.push("main");
+            showBingoPopup();
+            return;
+        }
+        if (
+            [4, 8, 12, 16, 20].every(index => board[index].classList.contains('active')) &&
+            !triggeredBingos.diagonals.includes("anti")
+        ) {
+            triggeredBingos.diagonals.push("anti");
+            showBingoPopup();
+            return;
+        }
+    }
+
+    // Function to display the bingo popup
+    function showBingoPopup() {
+        document.getElementById("bingo-popup").style.display = "flex";
+    }
+
+    const event = new MouseEvent('click', {
+        view: window,
+        bubbles: true,
+        cancelable: true
+    });
+
+    document.getElementById("free").dispatchEvent(event);
+});
+
+
+
+
 
 </script>
 </body>

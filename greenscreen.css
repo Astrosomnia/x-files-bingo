@@ -110,3 +110,91 @@ a:hover {
     }
   
   }
+
+/* Popup container (hidden by default) */
+#bingo-popup {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8); /* Black background with opacity */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's above other elements */
+}
+
+#bingo-gif {
+    max-width: 75%; /* Prevent the GIF from exceeding the width of its container */
+    height: auto; /* Maintain aspect ratio */
+    margin: 0 auto; /* Center it horizontally if needed */
+    display: block; /* Ensure it behaves like a block element for alignment */
+}
+
+
+/* Style the popup content box */
+.popup-content {
+    background-image: url('bg-lines1.jpeg'); /* Greenscreen background */
+    background-size: cover; /* Ensure it covers the entire box */
+    background-repeat: no-repeat; /* Prevent tiling */
+    background-position: center; /* Center the image */
+    background-color: rgba(0, 0, 0, 0.7); /* Add a semi-transparent black overlay */
+    background-blend-mode: multiply; /* Blend the overlay with the image */
+    border: 3px solid #00ff00;
+    padding: 20px;
+    text-align: center;
+    width: 80vw;
+    max-width: 500px;
+    box-shadow: 0 0 60px #00ff00;
+    position: relative; /* Required for positioning the close icon */
+    color: #00ff00;
+}
+
+/* Style the close icon */
+.close-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 4rem; /* Adjust size as needed */
+    font-family: 'Green Screen', sans-serif; /* Use the theme font */
+    color: #00ff00; /* Match theme text color */
+    cursor: pointer; /* Make it clickable */
+    border: none !important; /* No border */
+    box-shadow: none !important; /* Remove any shadows */
+}
+
+
+.close-icon:hover {
+    color: #00cc00; /* Slightly darker green on hover */
+}
+
+.popup-content h1 {
+    color: #00ff00;
+    font-size: 3em;
+    text-shadow: 0 0 20px #00ff00;
+}
+
+.popup-content p {
+    color: #00ff00;
+    margin-bottom: 20px;
+}
+
+#close-popup {
+    font-family: 'Green Screen', sans-serif; /* Use the Green Screen font */
+    color: #00ff00; /* Match the theme color */
+    background-color: transparent; /* Transparent background for theme consistency */
+    border: 2px solid #00ff00; /* Add a green border */
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00; /* Glowing text effect */
+    box-shadow: 0 0 10px #00ff00; /* Optional glowing button effect */
+}
+
+#close-popup:hover {
+    background-color: rgba(0, 255, 0, 0.1); /* Subtle green glow on hover */
+    border-color: #00ff00; /* Keep border consistent */
+}
+
+
