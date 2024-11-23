@@ -15,7 +15,7 @@ body {
 
 /* Apply a glowing text effect */
 .text {
-    text-shadow: 0 0 60px #00ff00b0, 0 0 60px #00ff00b0, 0 0 60px #00ff00b0;
+    text-shadow: 0 0 40px #00ff00b0, 0 0 40px #00ff00b0;
 }
 
 /* Style links */
