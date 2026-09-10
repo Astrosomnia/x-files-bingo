@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<!--
-Shamelessly, overtly, and clumsily ripped off from the great jP00p's Star Trek Bingo.
-Thanks to those who ran so I could stumble.
--->
+<!-- Shamelessly, overtly, and clumsily ripped off from the great jP00p's Star Trek Bingo.
+Thanks to those who ran so I could stumble. -->
 
 <html lang="en">
 
@@ -37,14 +35,21 @@ Thanks to those who ran so I could stumble.
 
 <body>
 
+
 <div class="wrap">
 
     <div class="top-bar">
 
         <div class="terminal-label">
+
             <span class="status-light"></span>
-            <span>X-FILES // FIELD OBSERVATION PROTOCOL</span>
+
+            <span>
+                X-FILES // FIELD OBSERVATION PROTOCOL
+            </span>
+
         </div>
+
 
         <button
             id="new-board"
@@ -110,7 +115,10 @@ Thanks to those who ran so I could stumble.
 </div>
 
 
-<div id="bingo-popup" class="popup">
+<div
+    id="bingo-popup"
+    class="popup"
+>
 
     <div class="popup-content">
 
@@ -137,7 +145,14 @@ Thanks to those who ran so I could stumble.
 
 <script>
 
-var apiKey = "FR57D8JH3LYH";
+
+/* =========================================================
+   SETTINGS
+========================================================= */
+
+
+var apiKey =
+    "FR57D8JH3LYH";
 
 
 var searchTerms = [
@@ -267,188 +282,607 @@ var stuff = [
 ];
 
 
-document.addEventListener("DOMContentLoaded", function () {
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
 
 
-    var board =
-        document.getElementById("bingo-board");
-
-
-    var cells =
-        Array.prototype.slice.call(
-            board.querySelectorAll(".cell")
-        );
-
-
-    var playableCells =
-        Array.prototype.slice.call(
-            board.querySelectorAll(".cell:not(#free)")
-        );
-
-
-    var popup =
-        document.getElementById("bingo-popup");
-
-
-    var closePopup =
-        document.getElementById("close-popup");
-
-
-    var newBoard =
-        document.getElementById("new-board");
-
-
-    var triggeredBingos = {
-
-        rows: [],
-        columns: [],
-        diagonals: []
-
-    };
-
-
-    /*
-    =========================================================
-    RANDOMISE
-    =========================================================
-    */
-
-    function shuffle(array) {
-
-        var copy =
-            array.slice();
-
-
-        for (
-            var i = copy.length - 1;
-            i > 0;
-            i--
-        ) {
-
-            var j =
-                Math.floor(
-                    Math.random() * (i + 1)
-                );
-
-
-            var temp =
-                copy[i];
-
-            copy[i] =
-                copy[j];
-
-            copy[j] =
-                temp;
-
-        }
-
-
-        return copy;
-
-    }
-
-
-    /*
-    =========================================================
-    TEXT FITTING
-    =========================================================
-    */
-
-
-    function fitText(cell) {
-
-
-        var text =
-            cell.querySelector(".text");
-
-
-        if (!text) {
-            return;
-        }
-
-
-        /*
-        Start from CSS size every time.
-        */
-
-        text.style.fontSize = "";
-
-
-        var maxWidth =
-            cell.clientWidth - 10;
-
-
-        var maxHeight =
-            cell.clientHeight - 10;
-
-
-        /*
-        Begin with whatever CSS naturally gave us.
-        */
-
-        var size =
-            parseFloat(
-                window
-                    .getComputedStyle(text)
-                    .fontSize
+        var board =
+            document.getElementById(
+                "bingo-board"
             );
 
 
-        /*
-        Only shrink if we actually need to.
-        */
+        var cells =
+            Array.prototype.slice.call(
+                board.querySelectorAll(
+                    ".cell"
+                )
+            );
 
-        while (
 
-            (
-                text.scrollWidth > maxWidth ||
-                text.scrollHeight > maxHeight
-            )
+        var playableCells =
+            Array.prototype.slice.call(
+                board.querySelectorAll(
+                    ".cell:not(#free)"
+                )
+            );
 
-            &&
 
-            size > 8
+        var popup =
+            document.getElementById(
+                "bingo-popup"
+            );
 
-        ) {
 
-            size -= 0.5;
+        var triggeredBingos = {
+
+            rows: [],
+
+            columns: [],
+
+            diagonals: []
+
+        };
+
+
+
+        /* =================================================
+           SHUFFLE
+        ================================================= */
+
+
+        function shuffle(array) {
+
+
+            var copy =
+                array.slice();
+
+
+            for (
+                var i =
+                    copy.length - 1;
+
+                i > 0;
+
+                i--
+            ) {
+
+
+                var j =
+                    Math.floor(
+                        Math.random() *
+                        (i + 1)
+                    );
+
+
+                var temp =
+                    copy[i];
+
+
+                copy[i] =
+                    copy[j];
+
+
+                copy[j] =
+                    temp;
+
+            }
+
+
+            return copy;
+
+        }
+
+
+
+        /* =================================================
+           TEXT FITTING
+
+           BIG FIRST.
+
+           Each phrase starts around 28px on a phone,
+           then ONLY that phrase shrinks if necessary.
+        ================================================= */
+
+
+        function fitText(cell) {
+
+
+            var text =
+                cell.querySelector(
+                    ".text"
+                );
+
+
+            if (!text) {
+                return;
+            }
+
+
+            /*
+            Available cell dimensions.
+            */
+
+            var maxWidth =
+                cell.clientWidth - 10;
+
+
+            var maxHeight =
+                cell.clientHeight - 10;
+
+
+            /*
+            Start aggressively large.
+
+            Cell width limits it naturally.
+            */
+
+            var startSize =
+                Math.min(
+                    30,
+                    cell.clientWidth * 0.23,
+                    cell.clientHeight * 0.30
+                );
+
+
+            /*
+            Never begin smaller than 17px.
+            */
+
+            startSize =
+                Math.max(
+                    17,
+                    startSize
+                );
+
+
+            var size =
+                startSize;
+
 
             text.style.fontSize =
                 size + "px";
 
+
+            /*
+            Shrink only until this phrase fits.
+            */
+
+            while (
+
+                (
+                    text.scrollWidth >
+                    maxWidth
+
+                    ||
+
+                    text.scrollHeight >
+                    maxHeight
+                )
+
+                &&
+
+                size > 10
+
+            ) {
+
+
+                size -= 0.5;
+
+
+                text.style.fontSize =
+                    size + "px";
+
+            }
+
         }
 
-    }
+
+        function fitAllText() {
 
 
-    function fitAllText() {
+            for (
+                var i = 0;
+                i < cells.length;
+                i++
+            ) {
 
 
-        for (
-            var i = 0;
-            i < cells.length;
-            i++
-        ) {
+                fitText(
+                    cells[i]
+                );
 
-            fitText(cells[i]);
+            }
 
         }
 
-    }
 
 
-    /*
-    =========================================================
-    GENERATE BOARD
-    =========================================================
-    */
+        /* =================================================
+           BOARD
+        ================================================= */
 
 
-    function generateBoard() {
+        function generateBoard() {
 
 
-        var shuffled =
-            shuffle(stuff);
+            var shuffled =
+                shuffle(stuff);
+
+
+            for (
+                var i = 0;
+                i < playableCells.length;
+                i++
+            ) {
+
+
+                var cell =
+                    playableCells[i];
+
+
+                cell
+                    .querySelector(
+                        ".text"
+                    )
+                    .textContent =
+                        shuffled[i];
+
+
+                cell.classList.remove(
+                    "active"
+                );
+
+
+                cell.style.backgroundImage =
+                    "none";
+
+
+                cell.gifRequestNumber =
+                    0;
+
+            }
+
+
+            document
+                .getElementById(
+                    "free"
+                )
+                .classList
+                .add(
+                    "active"
+                );
+
+
+            triggeredBingos.rows = [];
+
+            triggeredBingos.columns = [];
+
+            triggeredBingos.diagonals = [];
+
+
+            window.setTimeout(
+                fitAllText,
+                40
+            );
+
+        }
+
+
+
+        /* =================================================
+           GIF CACHE
+        ================================================= */
+
+
+        var gifPool = [];
+
+        var gifRequestRunning =
+            false;
+
+        var gifCallbacks =
+            [];
+
+
+        function fetchGifs() {
+
+
+            if (
+                gifRequestRunning
+            ) {
+                return;
+            }
+
+
+            gifRequestRunning =
+                true;
+
+
+            var term =
+                searchTerms[
+                    Math.floor(
+                        Math.random() *
+                        searchTerms.length
+                    )
+                ];
+
+
+            /*
+            IMPORTANT:
+
+            Correct Tenor endpoint:
+            g.tenor.com
+
+            not api.tenor.com
+            */
+
+
+            var url =
+
+                "https://g.tenor.com/v1/random" +
+
+                "?q=" +
+
+                encodeURIComponent(
+                    term + " x-files"
+                ) +
+
+                "&key=" +
+
+                encodeURIComponent(
+                    apiKey
+                ) +
+
+                "&limit=8" +
+
+                "&media_filter=minimal" +
+
+                "&contentfilter=off" +
+
+                "&locale=en_US";
+
+
+            fetch(url)
+
+                .then(
+                    function (response) {
+
+
+                        if (
+                            !response.ok
+                        ) {
+
+
+                            throw new Error(
+                                "Tenor HTTP " +
+                                response.status
+                            );
+
+                        }
+
+
+                        return response.json();
+
+                    }
+                )
+
+
+                .then(
+                    function (data) {
+
+
+                        var newGifs =
+                            [];
+
+
+                        if (
+                            data &&
+                            data.results
+                        ) {
+
+
+                            for (
+                                var i = 0;
+                                i < data.results.length;
+                                i++
+                            ) {
+
+
+                                var result =
+                                    data.results[i];
+
+
+                                try {
+
+
+                                    var gif =
+
+                                        result
+                                            .media[0]
+                                            .tinygif
+                                            .url;
+
+
+                                    if (gif) {
+
+
+                                        newGifs.push(
+                                            gif
+                                        );
+
+                                    }
+
+
+                                } catch (e) {
+
+
+                                    /*
+                                    Skip bad result.
+                                    */
+
+
+                                }
+
+                            }
+
+                        }
+
+
+                        gifPool =
+                            gifPool.concat(
+                                shuffle(
+                                    newGifs
+                                )
+                            );
+
+
+                        gifRequestRunning =
+                            false;
+
+
+                        serveGifCallbacks();
+
+                    }
+                )
+
+
+                .catch(
+                    function (error) {
+
+
+                        console.error(
+                            "TENOR ERROR:",
+                            error
+                        );
+
+
+                        gifRequestRunning =
+                            false;
+
+
+                        /*
+                        Still release queued clicks.
+                        */
+
+
+                        while (
+                            gifCallbacks.length
+                        ) {
+
+
+                            gifCallbacks
+                                .shift()(null);
+
+                        }
+
+                    }
+                );
+
+        }
+
+
+
+        function serveGifCallbacks() {
+
+
+            while (
+
+                gifCallbacks.length >
+
+                0
+
+                &&
+
+                gifPool.length >
+
+                0
+
+            ) {
+
+
+                var callback =
+                    gifCallbacks.shift();
+
+
+                callback(
+                    gifPool.pop()
+                );
+
+            }
+
+
+            /*
+            If people clicked more cells than
+            the current batch supplied,
+            fetch another batch.
+            */
+
+
+            if (
+                gifCallbacks.length >
+                0
+            ) {
+
+
+                fetchGifs();
+
+            }
+
+        }
+
+
+
+        function getGif(callback) {
+
+
+            if (
+                gifPool.length >
+                0
+            ) {
+
+
+                callback(
+                    gifPool.pop()
+                );
+
+
+                /*
+                Quietly refill before completely empty.
+                */
+
+
+                if (
+                    gifPool.length <
+                    3
+                ) {
+
+
+                    fetchGifs();
+
+                }
+
+
+                return;
+
+            }
+
+
+            gifCallbacks.push(
+                callback
+            );
+
+
+            fetchGifs();
+
+        }
+
+
+
+        /* =================================================
+           CELL INTERACTION
+        ================================================= */
 
 
         for (
@@ -458,758 +892,101 @@ document.addEventListener("DOMContentLoaded", function () {
         ) {
 
 
-            var cell =
-                playableCells[i];
+            playableCells[i]
+                .addEventListener(
+                    "click",
+                    function () {
 
 
-            var text =
-                cell.querySelector(".text");
-
-
-            text.textContent =
-                shuffled[i];
-
-
-            cell.classList.remove(
-                "active"
-            );
-
-
-            cell.style.backgroundImage =
-                "none";
-
-
-            cell.setAttribute(
-                "aria-pressed",
-                "false"
-            );
-
-
-            cell.gifRequestNumber =
-                0;
-
-        }
-
-
-        var free =
-            document.getElementById("free");
-
-
-        free.classList.add(
-            "active"
-        );
-
-
-        triggeredBingos.rows = [];
-
-        triggeredBingos.columns = [];
-
-        triggeredBingos.diagonals = [];
-
-
-        /*
-        Let the browser draw everything first,
-        THEN shrink any troublesome phrases.
-        */
-
-        window.setTimeout(
-            fitAllText,
-            20
-        );
-
-    }
-
-
-    /*
-    =========================================================
-    GIF CACHE
-    =========================================================
-    */
-
-
-    var gifPool = [];
-
-    var fetchingGifs = false;
-
-    var waitingForGif = [];
-
-
-    function randomSearchTerm() {
-
-
-        return searchTerms[
-            Math.floor(
-                Math.random() *
-                searchTerms.length
-            )
-        ];
-
-    }
-
-
-    function getGif(callback) {
-
-
-        /*
-        Already have one?
-        Use it instantly.
-        */
-
-        if (gifPool.length > 0) {
-
-
-            callback(
-                gifPool.pop()
-            );
-
-
-            return;
-
-        }
-
-
-        /*
-        Queue this cell while an existing request
-        is already being made.
-        */
-
-        waitingForGif.push(
-            callback
-        );
-
-
-        if (fetchingGifs) {
-
-            return;
-
-        }
-
-
-        fetchingGifs = true;
-
-
-        var term =
-            randomSearchTerm();
-
-
-        var url =
-
-            "https://api.tenor.com/v1/random?q=" +
-
-            encodeURIComponent(
-                term + " x-files"
-            ) +
-
-            "&key=" +
-            apiKey +
-
-            "&limit=5" +
-
-            "&contentfilter=off" +
-
-            "&locale=en_US";
-
-
-        fetch(url)
-
-            .then(function (response) {
-
-                return response.json();
-
-            })
-
-            .then(function (data) {
-
-
-                var urls = [];
-
-
-                if (
-                    data &&
-                    data.results
-                ) {
-
-
-                    for (
-                        var i = 0;
-                        i < data.results.length;
-                        i++
-                    ) {
-
-
-                        try {
-
-
-                            urls.push(
-
-                                data
-                                    .results[i]
-                                    .media[0]
-                                    .tinygif
-                                    .url
-
-                            );
-
-
-                        } catch (error) {
-
-                            /*
-                            Ignore malformed result.
-                            */
-
-                        }
-
-                    }
-
-                }
-
-
-                gifPool =
-                    shuffle(urls);
-
-
-                fetchingGifs =
-                    false;
-
-
-                /*
-                Serve everyone currently waiting.
-                */
-
-                while (
-                    waitingForGif.length > 0
-                ) {
-
-
-                    var cb =
-                        waitingForGif.shift();
-
-
-                    if (
-                        gifPool.length > 0
-                    ) {
-
-
-                        cb(
-                            gifPool.pop()
-                        );
-
-
-                    } else {
-
-
-                        cb(null);
-
-                    }
-
-                }
-
-            })
-
-            .catch(function (error) {
-
-
-                console.log(
-                    "Tenor GIF failed:",
-                    error
-                );
-
-
-                fetchingGifs =
-                    false;
-
-
-                while (
-                    waitingForGif.length > 0
-                ) {
-
-
-                    waitingForGif
-                        .shift()(null);
-
-                }
-
-            });
-
-    }
-
-
-    /*
-    =========================================================
-    CELL CLICKS
-    =========================================================
-    */
-
-
-    for (
-        var i = 0;
-        i < playableCells.length;
-        i++
-    ) {
-
-
-        playableCells[i]
-            .addEventListener(
-                "click",
-                function () {
-
-
-                    var cell =
-                        this;
-
-
-                    /*
-                    TURN OFF
-                    */
-
-
-                    if (
-                        cell.classList.contains(
-                            "active"
-                        )
-                    ) {
-
-
-                        cell.classList.remove(
-                            "active"
-                        );
-
-
-                        cell.style.backgroundImage =
-                            "none";
-
-
-                        cell.setAttribute(
-                            "aria-pressed",
-                            "false"
-                        );
+                        var cell =
+                            this;
 
 
                         /*
-                        Invalidates any GIF still loading.
+                        OFF
                         */
+
+
+                        if (
+                            cell.classList
+                                .contains(
+                                    "active"
+                                )
+                        ) {
+
+
+                            cell.classList
+                                .remove(
+                                    "active"
+                                );
+
+
+                            cell.style
+                                .backgroundImage =
+                                    "none";
+
+
+                            cell.gifRequestNumber++;
+
+
+                            return;
+
+                        }
+
+
+
+                        /*
+                        ON
+                        */
+
+
+                        cell.classList.add(
+                            "active"
+                        );
+
+
+                        checkForBingo();
+
 
                         cell.gifRequestNumber++;
 
 
-                        return;
+                        var requestNumber =
+                            cell.gifRequestNumber;
 
-                    }
 
+                        getGif(
+                            function (gifUrl) {
 
-                    /*
-                    TURN ON
-                    */
 
+                                /*
+                                Cell may have been turned
+                                off while GIF was loading.
+                                */
 
-                    cell.classList.add(
-                        "active"
-                    );
 
+                                if (
 
-                    cell.setAttribute(
-                        "aria-pressed",
-                        "true"
-                    );
+                                    !cell.classList
+                                        .contains(
+                                            "active"
+                                        )
 
+                                    ||
 
-                    /*
-                    Immediate interaction.
-                    Don't wait for GIF.
-                    */
+                                    cell.gifRequestNumber !==
+                                    requestNumber
 
-                    checkForBingo();
+                                ) {
 
 
-                    cell.gifRequestNumber++;
+                                    return;
 
+                                }
 
-                    var thisRequest =
-                        cell.gifRequestNumber;
 
+                                if (gifUrl) {
 
-                    getGif(
-                        function (gifUrl) {
 
-
-                            /*
-                            Cell may have been unticked
-                            while the GIF loaded.
-                            */
-
-
-                            if (
-
-                                !cell
-                                    .classList
-                                    .contains(
-                                        "active"
-                                    )
-
-                                ||
-
-                                cell.gifRequestNumber !==
-                                thisRequest
-
-                            ) {
-
-                                return;
-
-                            }
-
-
-                            if (gifUrl) {
-
-
-                                cell.style
-                                    .backgroundImage =
-
-                                    'url("' +
-                                    gifUrl +
-                                    '")';
-
-                            }
-
-                        }
-                    );
-
-                }
-            );
-
-    }
-
-
-    /*
-    =========================================================
-    BINGO
-    =========================================================
-    */
-
-
-    function checkForBingo() {
-
-
-        var size = 5;
-
-
-        for (
-            var i = 0;
-            i < size;
-            i++
-        ) {
-
-
-            var row =
-                cells.slice(
-                    i * size,
-                    (i + 1) * size
-                );
-
-
-            var rowComplete =
-                row.every(
-                    function (cell) {
-
-                        return cell
-                            .classList
-                            .contains(
-                                "active"
-                            );
-
-                    }
-                );
-
-
-            if (
-
-                rowComplete
-
-                &&
-
-                triggeredBingos.rows
-                    .indexOf(i) === -1
-
-            ) {
-
-
-                triggeredBingos
-                    .rows
-                    .push(i);
-
-
-                showBingoPopup();
-
-
-                return;
-
-            }
-
-
-            var column =
-                cells.filter(
-                    function (
-                        cell,
-                        index
-                    ) {
-
-                        return (
-                            index %
-                            size ===
-                            i
-                        );
-
-                    }
-                );
-
-
-            var columnComplete =
-                column.every(
-                    function (cell) {
-
-                        return cell
-                            .classList
-                            .contains(
-                                "active"
-                            );
-
-                    }
-                );
-
-
-            if (
-
-                columnComplete
-
-                &&
-
-                triggeredBingos.columns
-                    .indexOf(i) === -1
-
-            ) {
-
-
-                triggeredBingos
-                    .columns
-                    .push(i);
-
-
-                showBingoPopup();
-
-
-                return;
-
-            }
-
-        }
-
-
-        var main =
-            [0, 6, 12, 18, 24];
-
-
-        if (
-
-            main.every(
-                function (index) {
-
-                    return cells[index]
-                        .classList
-                        .contains(
-                            "active"
-                        );
-
-                }
-            )
-
-            &&
-
-            triggeredBingos.diagonals
-                .indexOf("main") === -1
-
-        ) {
-
-
-            triggeredBingos
-                .diagonals
-                .push("main");
-
-
-            showBingoPopup();
-
-
-            return;
-
-        }
-
-
-        var anti =
-            [4, 8, 12, 16, 20];
-
-
-        if (
-
-            anti.every(
-                function (index) {
-
-                    return cells[index]
-                        .classList
-                        .contains(
-                            "active"
-                        );
-
-                }
-            )
-
-            &&
-
-            triggeredBingos.diagonals
-                .indexOf("anti") === -1
-
-        ) {
-
-
-            triggeredBingos
-                .diagonals
-                .push("anti");
-
-
-            showBingoPopup();
-
-        }
-
-    }
-
-
-    /*
-    =========================================================
-    POPUP
-    =========================================================
-    */
-
-
-    function showBingoPopup() {
-
-
-        popup.classList.add(
-            "visible"
-        );
-
-    }
-
-
-    function hideBingoPopup() {
-
-
-        popup.classList.remove(
-            "visible"
-        );
-
-    }
-
-
-    closePopup.addEventListener(
-        "click",
-        hideBingoPopup
-    );
-
-
-    popup.addEventListener(
-        "click",
-        function (event) {
-
-
-            if (
-                event.target === popup
-            ) {
-
-                hideBingoPopup();
-
-            }
-
-        }
-    );
-
-
-    /*
-    =========================================================
-    NEW BOARD
-    =========================================================
-    */
-
-
-    newBoard.addEventListener(
-        "click",
-        generateBoard
-    );
-
-
-    /*
-    =========================================================
-    RESIZE
-    =========================================================
-    */
-
-
-    var resizeTimer;
-
-
-    window.addEventListener(
-        "resize",
-        function () {
-
-
-            clearTimeout(
-                resizeTimer
-            );
-
-
-            resizeTimer =
-                setTimeout(
-                    fitAllText,
-                    100
-                );
-
-        }
-    );
-
-
-    /*
-    =========================================================
-    START
-    =========================================================
-    */
-
-
-    generateBoard();
-
-
-    /*
-    Font may finish loading after first sizing pass.
-    Resize again once fonts settle if supported.
-    */
-
-
-    if (
-        document.fonts &&
-        document.fonts.ready
-    ) {
-
-
-        document.fonts.ready.then(
-            function () {
-
-                fitAllText();
-
-            }
-        );
-
-    }
-
-});
-
-</script>
-
-
-</body>
-
-</html>
+                                    cell.style
+    
