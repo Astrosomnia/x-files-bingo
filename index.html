@@ -1,140 +1,137 @@
 <!DOCTYPE html>
-<!-- Shamelessly, overtly, and clumsily ripped off from the great jP00p's Star Trek Bingo.
-Thanks to those who ran so I could stumble. -->
 
-<html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>X-Files Bingo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Impact&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.cdnfonts.com/css/green-screen" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="greenscreen.css">
-</head>
-<body id="stretch">
 
-<div class="wrap" id="gap">
-        <div>
-                <a class="green" href="#" onclick="window.location.reload();">New board</a>
-                <br>
-                <br>
+    <title>X-Files Bingo</title>
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <link
+        href="https://fonts.cdnfonts.com/css/green-screen"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        type="text/css"
+        href="greenscreen.css"
+    >
+</head>
+
+
+<body>
+
+<div class="wrap">
+
+    <div class="top-bar">
+
+        <div class="terminal-label">
+            <span class="status-light"></span>
+
+            <span>
+                X-FILES // FIELD OBSERVATION PROTOCOL
+            </span>
+        </div>
+
+        <button
+            id="new-board"
+            class="new-board"
+            type="button"
+        >
+            New board
+        </button>
+
     </div>
 
-        <div class="content">
-            <div class="bingo-board">
-                <!-- Replace these cells with your X-Files-themed objectives -->
-                <div class="cell">
-                    <div class="text"></div>
-                </div>
-                <div class="cell">
-                    <div class="text"></div>
-                </div>
-                <div class="cell">
-                    <div class="text"></div>
-                </div>
-                <div class="cell">
-                    <div class="text"></div>
-                </div>
-                <div class="cell">
-                    <div class="text"></div>
-                </div>
-                <div class="cell">
-                    <div class="text"></div>
-                </div>
-                <div class="cell">
-                    <div class="text"></div>
-                </div>
-                <div class="cell">
-                    <div class="text"></div>
-                </div>
-                <div class="cell">
-                    <div class="text"></div>
-                </div>
-                <div class="cell">
-                    <div class="text"></div>
-                </div>
-                <div class="cell">
-                    <div class="text"></div>
-                </div>
-                <div class="cell">
-                    <div class="text"></div>
-                </div>
-                <div class="cell" id="free">
-                    <div class="text">Free Space</div>
-                </div>
-                <div class="cell">
-                    <div class="text"></div>
-                </div>
-                <div class="cell">
-                    <div class="text"></div>
-                </div>
-                <div class="cell">
-                    <div class="text"></div>
-                </div>
-                <div class="cell">
-                    <div class="text"></div>
-                </div>
-                <div class="cell">
-                    <div class="text"></div>
-                </div>
-                <div class="cell">
-                    <div class="text"></div>
-                </div>
-                <div class="cell">
-                    <div class="text"></div>
-                </div>
-                <div class="cell">
-                    <div class="text"></div>
-                </div>
-                <div class="cell">
-                    <div class="text"></div>
-                </div>
-                <div class="cell">
-                    <div class="text"></div>
-                </div>
-                <div class="cell">
-                    <div class="text"></div>
-                </div>
-                <div class="cell">
-                    <div class="text"></div>
-                </div>
-                </div>
 
-            </div>
+    <div class="content">
+
+        <div
+            class="bingo-board"
+            id="bingo-board"
+        >
+
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+
+            <button
+                class="cell free active"
+                id="free"
+                type="button"
+                disabled
+            >
+                <span class="text">Free Space</span>
+            </button>
+
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+
         </div>
 
     </div>
+
 </div>
 
+
 <div id="bingo-popup" class="popup">
+
     <div class="popup-content">
-        <span id="close-popup" class="close-icon">X</span>
-                <img id="bingo-gif" src="bingo.gif" alt="Bingo Celebration">
+
+        <button
+            id="close-popup"
+            class="close-icon"
+            type="button"
+        >
+            X
+        </button>
+
+        <img
+            id="bingo-gif"
+            src="bingo.gif"
+            alt="Bingo Celebration"
+        >
+
         <h1>Bingo!</h1>
+
     </div>
+
 </div>
 
 
 <script>
 
-    var api_key = "FR57D8JH3LYH";
-    var search_terms = [
-        "Mulder",
-        "Scully",
-        "Alien",
-        "Cigarette Smoking Man",
-        "Creepy",
-        "Truth",
-        "Skinner",
-        "Mulder-and-Scully",
-        "Spooky",
+var stuff = [
 
-        // Add more relevant search terms here
-    ];
-
-    var stuff = [
     'Bat signal!',
     '"Mulder it\'s me"',
     '"Scully it\'s me"',
@@ -151,11 +148,11 @@ Thanks to those who ran so I could stumble. -->
     'We\'re in a police station',
     'Staying in a motel',
     'Forest strolls',
-    'Muldur eyebrow raise',
+    'Mulder eyebrow raise',
     'Cancer Man is ominous',
     'Cancer Man brags',
     'It\'s raining',
-    'Cemetary',
+    'Cemetery',
     'Hey, that\'s just Vancouver!',
     '"Stop, Federal Agent!"',
     'We\'re in this alone',
@@ -219,7 +216,7 @@ Thanks to those who ran so I could stumble. -->
     'Religious overtones',
     'Overt government conspiracy',
     'Humans are the real monsters',
-    'Mulder is lovin\'it',
+    'Mulder is lovin\' it',
     'This would flip modern science on its head',
     'Psychic powers',
     'Episode gets funny weird',
@@ -240,115 +237,395 @@ Thanks to those who ran so I could stumble. -->
     'Why would you touch that??',
     'CUT TO: Gun close-up',
     'Oozy goo',
-    'Police radio chatter',
-    ];
+    'Police radio chatter'
 
-document.addEventListener("DOMContentLoaded", function() {
-    var triggeredBingos = { rows: [], columns: [], diagonals: [] }; // Tracks completed lines
-
-    var cells = document.querySelectorAll('.bingo-board > div:not(#free) > div.text');
-    cells.forEach(function(cell) {
-        let pick = Math.floor(Math.random() * stuff.length);
-        cell.innerHTML = stuff[pick];
-        stuff.splice(pick, 1);
-    });
-
-    var allcells = document.querySelectorAll('.bingo-board > div');
-    allcells.forEach(function(cell) {
-        cell.addEventListener('click', function(e) {
-            e.preventDefault();
-
-            var toggle = this.style;
-            var search_url = "https://api.tenor.com/v1/random?q=" + search_terms[Math.floor(Math.random() * search_terms.length)] + " x-files&key=" + api_key + "&limit=5&contentfilter=off&locale=en_US";
-
-            if (cell.classList.contains("active")) {
-                cell.classList.remove("active");
-                toggle.backgroundImage = "none";
-            } else {
-                cell.classList.add("active");
-                fetch(search_url)
-                    .then(data => data.json())
-                    .then(data => {
-                        toggle.backgroundImage = "url(" + data.results[Math.floor(Math.random() * data.results.length)].media[0].tinygif.url + ")";
-                    });
-                checkForBingo(); // Check for bingo after marking a cell as active
-            }
-        });
-    });
-
-document.getElementById("close-popup").addEventListener("click", function() {
-    document.getElementById("bingo-popup").style.display = "none";
-});
+];
 
 
-    // Function to check for bingo
-    function checkForBingo() {
-        const board = Array.from(document.querySelectorAll('.bingo-board > div'));
-        const size = 5; // 5x5 board
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
 
-        // Check rows and columns
-        for (let i = 0; i < size; i++) {
-            // Check row
-            if (
-                board
-                    .slice(i * size, (i + 1) * size)
-                    .every(cell => cell.classList.contains('active')) &&
-                !triggeredBingos.rows.includes(i)
+        var board =
+            document.getElementById("bingo-board");
+
+        var cells =
+            board.querySelectorAll(".cell");
+
+        var playable =
+            board.querySelectorAll(".cell:not(#free)");
+
+        var popup =
+            document.getElementById("bingo-popup");
+
+
+        var triggeredBingos = {
+            rows: [],
+            columns: [],
+            diagonals: []
+        };
+
+
+        function shuffledCopy(array) {
+
+            var copy =
+                array.slice();
+
+            for (
+                var i = copy.length - 1;
+                i > 0;
+                i--
             ) {
-                triggeredBingos.rows.push(i);
-                showBingoPopup();
+
+                var j =
+                    Math.floor(
+                        Math.random() * (i + 1)
+                    );
+
+                var temp =
+                    copy[i];
+
+                copy[i] =
+                    copy[j];
+
+                copy[j] =
+                    temp;
+            }
+
+            return copy;
+        }
+
+
+        function fitText(cell) {
+
+            var text =
+                cell.querySelector(".text");
+
+            if (!text) {
                 return;
             }
-            // Check column
-            if (
-                board
-                    .filter((_, index) => index % size === i)
-                    .every(cell => cell.classList.contains('active')) &&
-                !triggeredBingos.columns.includes(i)
+
+            /*
+            START BIG.
+            */
+
+            var size = 26;
+
+            text.style.fontSize =
+                size + "px";
+
+
+            /*
+            Only shrink THIS square if it overflows.
+            */
+
+            while (
+                size > 11 &&
+                (
+                    text.scrollHeight >
+                    cell.clientHeight - 12
+                    ||
+                    text.scrollWidth >
+                    cell.clientWidth - 12
+                )
             ) {
-                triggeredBingos.columns.push(i);
-                showBingoPopup();
-                return;
+
+                size -= 1;
+
+                text.style.fontSize =
+                    size + "px";
             }
         }
 
-        // Check diagonals
-        if (
-            [0, 6, 12, 18, 24].every(index => board[index].classList.contains('active')) &&
-            !triggeredBingos.diagonals.includes("main")
-        ) {
-            triggeredBingos.diagonals.push("main");
-            showBingoPopup();
-            return;
+
+        function fitAllText() {
+
+            for (
+                var i = 0;
+                i < cells.length;
+                i++
+            ) {
+
+                fitText(cells[i]);
+            }
         }
-        if (
-            [4, 8, 12, 16, 20].every(index => board[index].classList.contains('active')) &&
-            !triggeredBingos.diagonals.includes("anti")
-        ) {
-            triggeredBingos.diagonals.push("anti");
-            showBingoPopup();
-            return;
+
+
+        function generateBoard() {
+
+            var shuffled =
+                shuffledCopy(stuff);
+
+
+            for (
+                var i = 0;
+                i < playable.length;
+                i++
+            ) {
+
+                playable[i]
+                    .querySelector(".text")
+                    .textContent =
+                        shuffled[i];
+
+                playable[i]
+                    .classList
+                    .remove("active");
+
+                playable[i]
+                    .style
+                    .backgroundImage =
+                        "none";
+            }
+
+
+            document
+                .getElementById("free")
+                .classList
+                .add("active");
+
+
+            triggeredBingos.rows = [];
+            triggeredBingos.columns = [];
+            triggeredBingos.diagonals = [];
+
+
+            setTimeout(
+                fitAllText,
+                50
+            );
         }
+
+
+        for (
+            var i = 0;
+            i < playable.length;
+            i++
+        ) {
+
+            playable[i]
+                .addEventListener(
+                    "click",
+                    function () {
+
+                        if (
+                            this.classList
+                                .contains("active")
+                        ) {
+
+                            this.classList
+                                .remove("active");
+
+                            this.style
+                                .backgroundImage =
+                                    "none";
+
+                        } else {
+
+                            this.classList
+                                .add("active");
+
+                            checkForBingo();
+                        }
+                    }
+                );
+        }
+
+
+        function checkForBingo() {
+
+            var size = 5;
+
+            var boardCells =
+                Array.prototype.slice.call(
+                    cells
+                );
+
+
+            for (
+                var i = 0;
+                i < size;
+                i++
+            ) {
+
+                var row =
+                    boardCells.slice(
+                        i * size,
+                        (i + 1) * size
+                    );
+
+
+                var rowDone =
+                    row.every(
+                        function (cell) {
+                            return cell
+                                .classList
+                                .contains("active");
+                        }
+                    );
+
+
+                if (
+                    rowDone &&
+                    triggeredBingos.rows
+                        .indexOf(i) === -1
+                ) {
+
+                    triggeredBingos.rows.push(i);
+
+                    showBingo();
+
+                    return;
+                }
+
+
+                var column = [];
+
+
+                for (
+                    var j = i;
+                    j < 25;
+                    j += 5
+                ) {
+
+                    column.push(
+                        boardCells[j]
+                    );
+                }
+
+
+                var columnDone =
+                    column.every(
+                        function (cell) {
+                            return cell
+                                .classList
+                                .contains("active");
+                        }
+                    );
+
+
+                if (
+                    columnDone &&
+                    triggeredBingos.columns
+                        .indexOf(i) === -1
+                ) {
+
+                    triggeredBingos.columns.push(i);
+
+                    showBingo();
+
+                    return;
+                }
+            }
+
+
+            var main =
+                [0, 6, 12, 18, 24];
+
+
+            if (
+                main.every(
+                    function (index) {
+
+                        return boardCells[index]
+                            .classList
+                            .contains("active");
+                    }
+                )
+            ) {
+
+                if (
+                    triggeredBingos.diagonals
+                        .indexOf("main") === -1
+                ) {
+
+                    triggeredBingos.diagonals
+                        .push("main");
+
+                    showBingo();
+
+                    return;
+                }
+            }
+
+
+            var anti =
+                [4, 8, 12, 16, 20];
+
+
+            if (
+                anti.every(
+                    function (index) {
+
+                        return boardCells[index]
+                            .classList
+                            .contains("active");
+                    }
+                )
+            ) {
+
+                if (
+                    triggeredBingos.diagonals
+                        .indexOf("anti") === -1
+                ) {
+
+                    triggeredBingos.diagonals
+                        .push("anti");
+
+                    showBingo();
+                }
+            }
+        }
+
+
+        function showBingo() {
+
+            popup.classList.add(
+                "visible"
+            );
+        }
+
+
+        document
+            .getElementById("close-popup")
+            .addEventListener(
+                "click",
+                function () {
+
+                    popup.classList.remove(
+                        "visible"
+                    );
+                }
+            );
+
+
+        document
+            .getElementById("new-board")
+            .addEventListener(
+                "click",
+                generateBoard
+            );
+
+
+        window.addEventListener(
+            "resize",
+            function () {
+
+                setTimeout(
+                    fitAllText,
+                    50
+                );
+            }
+        );
+
+
+        generateBoard();
+
     }
-
-    // Function to display the bingo popup
-    function showBingoPopup() {
-        document.getElementById("bingo-popup").style.display = "flex";
-    }
-
-    const event = new MouseEvent('click', {
-        view: window,
-        bubbles: true,
-        cancelable: true
-    });
-
-    document.getElementById("free").dispatchEvent(event);
-});
-
-
-
-
+);
 
 </script>
+
 </body>
+
 </html>
