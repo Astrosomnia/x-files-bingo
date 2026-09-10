@@ -1,200 +1,947 @@
+/* =========================================================
+   VARIABLES
+========================================================= */
 
-/* Reset some default styles for better control */
+:root {
+
+    --green: #00ff00;
+
+    --green-bright: rgba(0, 255, 0, 1);
+
+    --green-text: rgba(0, 255, 0, 0.67);
+
+    --green-dim: rgba(0, 255, 0, 0.28);
+
+    --green-faint: rgba(0, 255, 0, 0.12);
+
+    --black: #000;
+
+    --board-gap: 0px;
+}
+
+
+/* =========================================================
+   BASIC RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+
+html {
+    margin: 0;
+    padding: 0;
+
+    background: #000;
+}
+
+
 body {
-    margin: 0px;
-    padding: 10px;
-    font-family: 'Green Screen', sans-serif;
-    background-image: url(bg-lines1.jpeg);
-    background-size: 0.3;
-    background-repeat: repeat;
-    background-position: top left;
-    background-blend-mode: multiply;
-    background-color: #0000007b;
-    color: #00ff0087; /* Green text */
+
+    min-height: 100svh;
+
+    margin: 0;
+
+    padding:
+        max(12px, env(safe-area-inset-top))
+        max(12px, env(safe-area-inset-right))
+        max(12px, env(safe-area-inset-bottom))
+        max(12px, env(safe-area-inset-left));
+
+    font-family:
+        'Green Screen',
+        monospace;
+
+    color: var(--green-text);
+
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.42),
+            rgba(0, 0, 0, 0.42)
+        ),
+        url("bg-lines1.jpeg");
+
+    background-repeat:
+        repeat,
+        repeat;
+
+    background-position:
+        top left,
+        top left;
+
+    /*
+        Replace the invalid old:
+        background-size: 0.3;
+    */
+
+    background-size:
+        auto,
+        320px auto;
+
+    background-color:
+        #050805;
+
+    overflow-x: hidden;
 }
 
-/* Apply a glowing text effect */
+
+/* =========================================================
+   GLOBAL CRT TEXT
+========================================================= */
+
 .text {
-    text-shadow: 0 0 40px #00ff00b0, 0 0 40px #00ff00b0;
+
+    position: relative;
+
+    z-index: 3;
+
+    width: 100%;
+
+    max-width: 100%;
+
+    line-height: 1.04;
+
+    text-align: center;
+
+    white-space: normal;
+
+    overflow-wrap: break-word;
+
+    word-break: normal;
+
+    text-wrap: balance;
+
+    text-shadow:
+        0 0 14px rgba(0, 255, 0, 0.75),
+        0 0 34px rgba(0, 255, 0, 0.38);
+
+    pointer-events: none;
 }
 
-/* Style links */
-a {
-    color: #00FF00;
+
+/* =========================================================
+   PAGE LAYOUT
+========================================================= */
+
+.wrap {
+
+    width: 100%;
+
+    min-height:
+        calc(
+            100svh -
+            24px
+        );
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.board-header {
+
+    width: min(
+        96vw,
+        calc(100svh - 86px)
+    );
+
+    min-height: 48px;
+
+    margin: 0 auto 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    color:
+        rgba(0, 255, 0, 0.64);
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.055em;
+}
+
+
+.terminal-meta {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    font-size:
+        clamp(
+            8px,
+            1vw,
+            12px
+        );
+
+    opacity: 0.8;
+}
+
+
+.status-light {
+
+    width: 7px;
+
+    height: 7px;
+
+    flex: 0 0 auto;
+
+    display: inline-block;
+
+    border-radius: 50%;
+
+    background:
+        var(--green);
+
+    box-shadow:
+        0 0 7px var(--green),
+        0 0 14px rgba(0,255,0,.75);
+
+    animation:
+        terminal-pulse
+        2.2s
+        ease-in-out
+        infinite;
+}
+
+
+@keyframes terminal-pulse {
+
+    0%,
+    100% {
+        opacity: 0.45;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+
+.new-board {
+
+    appearance: none;
+
+    border: 0;
+
+    padding: 6px 0;
+
+    margin: 0;
+
+    background: transparent;
+
+    color:
+        var(--green);
+
+    font: inherit;
+
+    font-size:
+        clamp(
+            12px,
+            1.3vw,
+            16px
+        );
+
     text-decoration: underline;
+
+    text-underline-offset: 3px;
+
+    cursor: pointer;
+
+    text-shadow:
+        0 0 12px
+        rgba(0, 255, 0, 0.65);
+
+    transition:
+        opacity 0.18s ease;
 }
 
-a:hover {
-    color: #00ff009b;
+
+.new-board:hover {
+    opacity: 0.65;
 }
+
+
+.new-board:focus-visible {
+
+    outline:
+        1px solid
+        var(--green);
+
+    outline-offset:
+        4px;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 0;
+}
+
+
+/* =========================================================
+   BINGO BOARD
+========================================================= */
 
 .bingo-board {
+
+    /*
+        Keeps the board square while respecting
+        BOTH screen width and screen height.
+    */
+
+    width:
+        min(
+            96vw,
+            calc(100svh - 86px)
+        );
+
+    aspect-ratio: 1;
+
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    width: 95vw; /* Set the container width */
-    height: 95vh; /* Set the container height */
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    grid-template-rows:
+        repeat(5, minmax(0, 1fr));
+
+    gap:
+        var(--board-gap);
+
+    border:
+        1px solid
+        rgba(0, 255, 0, 0.14);
+
+    box-shadow:
+        0 0 45px
+        rgba(0, 255, 0, 0.055);
+
+    background:
+        rgba(0, 0, 0, 0.22);
 }
 
 
-.bingo-board > div {
-    transition: all 0.23s ease-out;
-    vertical-align: middle;
-    margin:0px;    
-    background-size: cover !important;
-    background-repeat: no-repeat !important;
-    background-position: center center !important;
-    background-image: none;
-    cursor: pointer;
-    text-align: center;
-    font-weight: 100;
-    font-size: clamp(11px, 2vw, 3.1vh);
+/* =========================================================
+   CELLS
+========================================================= */
+
+.cell {
+
+    /*
+        Reset button defaults.
+    */
+
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    font-family:
+        'Green Screen',
+        monospace;
+
+
+    position: relative;
+
+    min-width: 0;
+
+    min-height: 0;
+
+    margin: 0;
+
+    padding: 8px;
+
+
     overflow: hidden;
+
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
-    border: 2px solid #00ff004e;
-    background-color: rgba(0, 0, 0, 0.5);
-    white-space: normal;
-}
-.bingo-board > div:hover {
-    background-color: rgba(0, 255, 0, 0.291);
-    
+
+
+    cursor: pointer;
+
+
+    color:
+        var(--green-text);
+
+
+    border:
+        1px solid
+        rgba(0, 255, 0, 0.31);
+
+
+    background-color:
+        rgba(0, 0, 0, 0.55);
+
+
+    background-size:
+        cover;
+
+    background-repeat:
+        no-repeat;
+
+    background-position:
+        center;
+
+
+    /*
+        Explicit transitions instead of:
+        transition: all
+    */
+
+    transition:
+        background-color 0.2s ease-out,
+        border-color 0.2s ease-out,
+        color 0.2s ease-out,
+        box-shadow 0.2s ease-out,
+        filter 0.2s ease-out;
 }
 
-.bingo-board > div.active {
-    box-shadow: inset 0px 0px 30px #00FF00, 0px 0px 30px #00FF00;
-    background-color:#00FF00;
-    border:2px #00FF00 solid;
-    color:#00FF00;
-  }
-  .bingo-board > div.active div.text { opacity:1; }
-  
-  
-  
-  
-  @media screen and (max-width:1024px){
-    
-    .bingo-board { 
-      width:95vw;
-      height:95vh;
-      margin:0 auto;
-      border-radius: 0px;
-    }
-    .bingo-board > div {
-      font-weight:600;
-    }
-    .content {
-      padding:0 0 10px 0px !important;
-    }
-    .left-frame, .bar-panel, .corner-bg {
-      display:none;
-    }
-  }
-  
-  @media screen and (max-width:768px){
-    
-    .bingo-board > div:focus, .bingo-board >  div:hover, .bingo-board > div:active { background-color:rgba(11,11,11,0.9); outline: none;}
-  
-    .bingo-board {
-      height:90vh;
-    }
-    .left-frame {
-      width:30px;
-      min-width:30px;
-    }
-    .right-frame {
-      width:auto;
-    }
-    .content {
-      padding:10px;
-    }
-  
-  }
 
-/* Popup container (hidden by default) */
-#bingo-popup {
-    display: none; /* Hidden by default */
+/*
+    Very subtle CRT scanlines over EVERY square.
+*/
+
+.cell::before {
+
+    content: "";
+
+    position: absolute;
+
+    z-index: 1;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0) 0px,
+            rgba(0, 0, 0, 0) 2px,
+            rgba(0, 0, 0, 0.13) 3px
+        );
+
+    opacity: 0.45;
+}
+
+
+/*
+    Active-state tint layer.
+
+    Importantly: the GIF still fills the WHOLE CELL.
+    This simply makes it feel like an image being seen
+    through an old terminal rather than a raw GIF.
+*/
+
+.cell::after {
+
+    content: "";
+
+    position: absolute;
+
+    z-index: 2;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    background:
+        linear-gradient(
+            rgba(0, 255, 0, 0.08),
+            rgba(0, 18, 0, 0.23)
+        );
+
+    transition:
+        opacity 0.2s ease;
+}
+
+
+/* =========================================================
+   CELL HOVER
+========================================================= */
+
+@media (hover: hover) {
+
+    .cell:hover {
+
+        background-color:
+            rgba(0, 255, 0, 0.16);
+
+        border-color:
+            rgba(0, 255, 0, 0.7);
+    }
+}
+
+
+.cell:focus-visible {
+
+    outline:
+        2px solid
+        var(--green);
+
+    outline-offset:
+        -4px;
+
+    z-index: 5;
+}
+
+
+/* =========================================================
+   ACTIVE CELLS
+========================================================= */
+
+.cell.active {
+
+    color:
+        #00ff00;
+
+    border-color:
+        rgba(0, 255, 0, 0.95);
+
+    background-color:
+        rgba(0, 45, 0, 0.82);
+
+
+    /*
+        Still glowy, just substantially cheaper
+        than the previous massive external blur.
+    */
+
+    box-shadow:
+        inset
+        0 0 22px
+        rgba(0, 255, 0, 0.42),
+        inset
+        0 0 4px
+        rgba(0, 255, 0, 0.9);
+}
+
+
+.cell.active::after {
+    opacity: 1;
+}
+
+
+.cell.active .text {
+
+    color:
+        rgba(0, 255, 0, 0.98);
+
+    text-shadow:
+        0 0 4px
+        rgba(0, 0, 0, 1),
+
+        0 0 9px
+        rgba(0, 0, 0, 1),
+
+        0 0 12px
+        rgba(0, 255, 0, 0.95),
+
+        0 0 26px
+        rgba(0, 255, 0, 0.7);
+}
+
+
+/* =========================================================
+   FREE SPACE
+========================================================= */
+
+.cell.free {
+
+    cursor: default;
+
+    opacity: 1;
+
+    background-image:
+        radial-gradient(
+            circle at center,
+            rgba(0, 255, 0, 0.15),
+            rgba(0, 0, 0, 0.76)
+        );
+
+    box-shadow:
+        inset
+        0 0 28px
+        rgba(0, 255, 0, 0.32);
+}
+
+
+.cell.free .text {
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        0.06em;
+
+    color:
+        rgba(0, 255, 0, 0.83);
+}
+
+
+/* =========================================================
+   POPUP
+========================================================= */
+
+.popup {
+
+    display: flex;
+
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.8); /* Black background with opacity */
-    justify-content: center;
+
+    z-index: 1000;
+
+    inset: 0;
+
+    padding: 20px;
+
     align-items: center;
-    z-index: 1000; /* Ensure it's above other elements */
+
+    justify-content: center;
+
+    background:
+        rgba(0, 0, 0, 0.88);
+
+
+    /*
+        Hide without repeatedly changing display.
+        This lets us animate it.
+    */
+
+    visibility: hidden;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.18s ease,
+        visibility 0.18s ease;
 }
+
+
+.popup.visible {
+
+    visibility: visible;
+
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+
+/* =========================================================
+   POPUP CONTENT
+========================================================= */
+
+.popup-content {
+
+    position: relative;
+
+    width:
+        min(
+            80vw,
+            500px
+        );
+
+    padding:
+        24px;
+
+
+    text-align:
+        center;
+
+
+    color:
+        var(--green);
+
+
+    border:
+        2px solid
+        var(--green);
+
+
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.62),
+            rgba(0, 0, 0, 0.62)
+        ),
+        url("bg-lines1.jpeg");
+
+
+    background-size:
+        cover;
+
+    background-repeat:
+        no-repeat;
+
+    background-position:
+        center;
+
+
+    box-shadow:
+        0 0 44px
+        rgba(0, 255, 0, 0.58);
+}
+
+
+/* =========================================================
+   BINGO GIF
+========================================================= */
 
 #bingo-gif {
-    max-width: 75%; /* Prevent the GIF from exceeding the width of its container */
-    height: auto; /* Maintain aspect ratio */
-    margin: 0 auto; /* Center it horizontally if needed */
-    display: block; /* Ensure it behaves like a block element for alignment */
+
+    display: block;
+
+    width: auto;
+
+    max-width: 75%;
+
+    height: auto;
+
+    margin:
+        10px auto 16px;
 }
 
 
-/* Style the popup content box */
-.popup-content {
-    background-image: url('bg-lines1.jpeg'); /* Greenscreen background */
-    background-size: cover; /* Ensure it covers the entire box */
-    background-repeat: no-repeat; /* Prevent tiling */
-    background-position: center; /* Center the image */
-    background-color: rgba(0, 0, 0, 0.7); /* Add a semi-transparent black overlay */
-    background-blend-mode: multiply; /* Blend the overlay with the image */
-    border: 3px solid #00ff00;
-    padding: 20px;
-    text-align: center;
-    width: 80vw;
-    max-width: 500px;
-    box-shadow: 0 0 60px #00ff00;
-    position: relative; /* Required for positioning the close icon */
-    color: #00ff00;
+/* =========================================================
+   POPUP HEADING
+========================================================= */
+
+.popup-content h1 {
+
+    margin:
+        12px 0 4px;
+
+    color:
+        var(--green);
+
+    font-size:
+        clamp(
+            2rem,
+            8vw,
+            3rem
+        );
+
+    text-shadow:
+        0 0 20px
+        rgba(0, 255, 0, 0.9);
 }
 
-/* Style the close icon */
+
+/* =========================================================
+   CLOSE ICON
+========================================================= */
+
 .close-icon {
+
+    appearance: none;
+
     position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 4rem; /* Adjust size as needed */
-    font-family: 'Green Screen', sans-serif; /* Use the theme font */
-    color: #00ff00; /* Match theme text color */
-    cursor: pointer; /* Make it clickable */
-    border: none !important; /* No border */
-    box-shadow: none !important; /* Remove any shadows */
+
+    z-index: 3;
+
+    top: 8px;
+
+    right: 12px;
+
+
+    margin: 0;
+
+    padding: 0;
+
+
+    border: 0;
+
+    background:
+        transparent;
+
+
+    font-family:
+        'Green Screen',
+        monospace;
+
+    font-size:
+        clamp(
+            2.4rem,
+            8vw,
+            4rem
+        );
+
+
+    line-height: 1;
+
+
+    color:
+        var(--green);
+
+
+    cursor:
+        pointer;
+
+
+    text-shadow:
+        0 0 14px
+        rgba(0, 255, 0, 0.75);
+
+
+    transition:
+        opacity 0.18s ease;
 }
 
 
 .close-icon:hover {
-    color: #00cc00; /* Slightly darker green on hover */
-}
-
-.popup-content h1 {
-    color: #00ff00;
-    font-size: 3em;
-    text-shadow: 0 0 20px #00ff00;
-}
-
-.popup-content p {
-    color: #00ff00;
-    margin-bottom: 20px;
-}
-
-#close-popup {
-    font-family: 'Green Screen', sans-serif; /* Use the Green Screen font */
-    color: #00ff00; /* Match the theme color */
-    background-color: transparent; /* Transparent background for theme consistency */
-    border: 2px solid #00ff00; /* Add a green border */
-    padding: 10px 20px;
-    font-size: 1em;
-    cursor: pointer;
-    text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00; /* Glowing text effect */
-    box-shadow: 0 0 10px #00ff00; /* Optional glowing button effect */
-}
-
-#close-popup:hover {
-    background-color: rgba(0, 255, 0, 0.1); /* Subtle green glow on hover */
-    border-color: #00ff00; /* Keep border consistent */
+    opacity: 0.65;
 }
 
 
+.close-icon:focus-visible {
+
+    outline:
+        1px solid
+        var(--green);
+
+    outline-offset:
+        3px;
+}
+
+
+/* =========================================================
+   TABLET / MOBILE
+========================================================= */
+
+@media screen and (max-width: 768px) {
+
+    body {
+
+        padding:
+            max(7px, env(safe-area-inset-top))
+            max(7px, env(safe-area-inset-right))
+            max(7px, env(safe-area-inset-bottom))
+            max(7px, env(safe-area-inset-left));
+    }
+
+
+    .board-header {
+
+        width:
+            min(
+                98vw,
+                calc(100svh - 70px)
+            );
+
+        min-height:
+            40px;
+
+        margin-bottom:
+            6px;
+    }
+
+
+    .terminal-meta {
+
+        max-width:
+            52%;
+
+        line-height:
+            1.1;
+    }
+
+
+    .bingo-board {
+
+        width:
+            min(
+                98vw,
+                calc(100svh - 70px)
+            );
+    }
+
+
+    .cell {
+        padding: 5px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media screen and (max-width: 480px) {
+
+    .terminal-meta {
+        font-size: 7px;
+    }
+
+
+    .new-board {
+        font-size: 11px;
+    }
+
+
+    .cell {
+        padding: 4px;
+    }
+
+
+    .popup-content {
+        width: 92vw;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration:
+            0.01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            0.01ms !important;
+    }
+}
