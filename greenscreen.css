@@ -23,17 +23,16 @@ html {
 ========================================================= */
 
 body {
-
     margin: 0;
 
     padding:
-        max(8px, env(safe-area-inset-top))
-        max(8px, env(safe-area-inset-right))
-        max(8px, env(safe-area-inset-bottom))
-        max(8px, env(safe-area-inset-left));
+        max(6px, env(safe-area-inset-top))
+        max(6px, env(safe-area-inset-right))
+        max(6px, env(safe-area-inset-bottom))
+        max(6px, env(safe-area-inset-left));
 
     min-height: 100vh;
-    min-height: 100svh;
+    min-height: 100dvh;
 
     overflow: hidden;
 
@@ -42,18 +41,16 @@ body {
         monospace;
 
     color:
-        rgba(0, 255, 0, 0.58);
+        rgba(0, 255, 0, 0.62);
 
     background-color:
         #020402;
 
     background-image:
-
         linear-gradient(
-            rgba(0, 0, 0, 0.45),
-            rgba(0, 0, 0, 0.45)
+            rgba(0, 0, 0, 0.46),
+            rgba(0, 0, 0, 0.46)
         ),
-
         url("bg-lines1.jpeg");
 
     background-repeat:
@@ -74,23 +71,23 @@ body {
 ========================================================= */
 
 .wrap {
-
     width: 100%;
 
     height:
         calc(
-            100vh - 16px
+            100vh - 12px
         );
 
     height:
         calc(
-            100svh - 16px
+            100dvh - 12px
         );
 
     display: flex;
 
     flex-direction: column;
 
+    min-height: 0;
 }
 
 
@@ -99,9 +96,9 @@ body {
 ========================================================= */
 
 .top-bar {
+    flex: 0 0 54px;
 
-    flex:
-        0 0 62px;
+    min-height: 54px;
 
     display: flex;
 
@@ -109,119 +106,100 @@ body {
 
     justify-content: space-between;
 
-    gap: 12px;
+    gap: 10px;
 
     padding:
-        0 4px;
-
+        0 2px;
 }
 
 
 .terminal-label {
-
     display: flex;
 
     align-items: center;
 
-    gap: 9px;
+    gap: 8px;
 
-    max-width:
-        65%;
+    max-width: 66%;
 
     color:
         rgba(0, 255, 0, 0.58);
 
     font-size:
         clamp(
-            9px,
-            1.7vw,
-            15px
+            8px,
+            1.8vw,
+            13px
         );
 
     line-height:
         0.95;
 
     letter-spacing:
-        0.04em;
+        0.035em;
 
     text-transform:
         uppercase;
 
     text-shadow:
-        0 0 12px
-        rgba(0, 255, 0, 0.55);
-
+        0 0 10px
+        rgba(0, 255, 0, 0.5);
 }
 
 
 .status-light {
-
     width: 8px;
 
     height: 8px;
 
-    flex:
-        0 0 8px;
+    flex: 0 0 8px;
 
-    display:
-        inline-block;
+    display: inline-block;
 
-    border-radius:
-        50%;
+    border-radius: 50%;
 
-    background:
-        #00ff00;
+    background: #00ff00;
 
     box-shadow:
         0 0 8px
         rgba(0, 255, 0, 0.9);
-
 }
 
 
 .new-board {
+    appearance: none;
+    -webkit-appearance: none;
 
-    appearance:
-        none;
+    border: 0;
 
-    -webkit-appearance:
-        none;
+    margin: 0;
 
-    border:
-        0;
+    padding: 4px 1px;
 
-    padding:
-        6px 2px;
+    background: transparent;
 
-    background:
-        transparent;
+    color: #00ff00;
 
-    color:
-        #00ff00;
-
-    font-family:
-        inherit;
+    font-family: inherit;
 
     font-size:
         clamp(
-            14px,
-            2.1vw,
-            20px
+            13px,
+            2vw,
+            18px
         );
 
-    text-decoration:
-        underline;
+    line-height: 1;
 
-    text-underline-offset:
-        3px;
+    text-decoration: underline;
 
-    cursor:
-        pointer;
+    text-underline-offset: 3px;
+
+    cursor: pointer;
 
     text-shadow:
-        0 0 12px
-        rgba(0, 255, 0, 0.65);
-
+        0 0 10px
+        rgba(0, 255, 0, 0.6);
 }
 
 
@@ -230,16 +208,15 @@ body {
 ========================================================= */
 
 .content {
+    flex: 1 1 auto;
 
-    flex:
-        1 1 auto;
+    min-height: 0;
 
-    min-height:
-        0;
+    width: 100%;
 
-    width:
-        100%;
+    display: block;
 
+    overflow: hidden;
 }
 
 
@@ -248,15 +225,13 @@ body {
 ========================================================= */
 
 .bingo-board {
+    width: 100%;
 
-    width:
-        100%;
+    height: 100%;
 
-    height:
-        100%;
+    min-height: 0;
 
-    display:
-        grid;
+    display: grid;
 
     grid-template-columns:
         repeat(
@@ -273,6 +248,9 @@ body {
     background:
         rgba(0, 0, 0, 0.24);
 
+    border:
+        1px solid
+        rgba(0, 255, 0, 0.16);
 }
 
 
@@ -281,83 +259,54 @@ body {
 ========================================================= */
 
 .cell {
+    appearance: none;
+    -webkit-appearance: none;
 
-    appearance:
-        none;
+    position: relative;
 
-    -webkit-appearance:
-        none;
+    min-width: 0;
+    min-height: 0;
 
-    position:
-        relative;
+    margin: 0;
 
-    min-width:
-        0;
+    padding: 5px;
 
-    min-height:
-        0;
+    overflow: hidden;
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    justify-content:
-        center;
+    justify-content: center;
 
-    overflow:
-        hidden;
-
-    margin:
-        0;
-
-    padding:
-        5px;
-
-    cursor:
-        pointer;
+    cursor: pointer;
 
     border:
         1px solid
-        rgba(0, 255, 0, 0.34);
+        rgba(0, 255, 0, 0.36);
 
-    border-radius:
-        0;
+    border-radius: 0;
 
     color:
-        rgba(0, 255, 0, 0.58);
+        rgba(0, 255, 0, 0.62);
 
     font-family:
         'Green Screen',
         monospace;
 
     background-color:
-        rgba(0, 0, 0, 0.52);
+        rgba(0, 0, 0, 0.54);
 
-    background-size:
-        cover;
+    background-size: cover;
 
-    background-repeat:
-        no-repeat;
+    background-repeat: no-repeat;
 
-    background-position:
-        center;
+    background-position: center;
 
     transition:
-
-        background-color
-        0.18s
-        ease-out,
-
-        border-color
-        0.18s
-        ease-out,
-
-        box-shadow
-        0.18s
-        ease-out;
-
+        background-color 0.16s ease-out,
+        border-color 0.16s ease-out,
+        box-shadow 0.16s ease-out;
 }
 
 
@@ -366,30 +315,15 @@ body {
 ========================================================= */
 
 .text {
+    position: relative;
 
-    position:
-        relative;
+    z-index: 3;
 
-    z-index:
-        3;
+    display: block;
 
-    display:
-        block;
+    width: 100%;
 
-    width:
-        100%;
-
-    max-width:
-        100%;
-
-    /*
-    IMPORTANT:
-
-    This is the fallback.
-
-    Text appears at this size immediately even before
-    JS does any fitting.
-    */
+    max-width: 100%;
 
     font-size:
         clamp(
@@ -398,155 +332,84 @@ body {
             3vh
         );
 
-    font-weight:
-        400;
+    font-weight: 400;
 
-    line-height:
-        1.02;
+    line-height: 1.02;
 
-    text-align:
-        center;
+    text-align: center;
 
-    white-space:
-        normal;
+    white-space: normal;
 
-    overflow-wrap:
-        anywhere;
+    overflow-wrap: anywhere;
 
-    word-break:
-        normal;
+    word-break: normal;
 
-    color:
-        inherit;
+    color: inherit;
 
     text-shadow:
+        0 0 12px
+        rgba(0, 255, 0, 0.72),
+        0 0 30px
+        rgba(0, 255, 0, 0.34);
 
-        0 0 14px
-        rgba(0, 255, 0, 0.75),
-
-        0 0 35px
-        rgba(0, 255, 0, 0.38);
-
-    pointer-events:
-        none;
-
+    pointer-events: none;
 }
 
 
 /* =========================================================
-   CRT LAYER
+   CRT OVERLAY
 ========================================================= */
 
 .cell::before {
+    content: "";
 
-    content:
-        "";
+    position: absolute;
 
-    position:
-        absolute;
+    z-index: 1;
 
-    z-index:
-        1;
+    inset: 0;
 
-    inset:
-        0;
-
-    pointer-events:
-        none;
+    pointer-events: none;
 
     background:
-
         repeating-linear-gradient(
-
             0deg,
-
-            rgba(
-                0,
-                0,
-                0,
-                0
-            )
-            0px,
-
-            rgba(
-                0,
-                0,
-                0,
-                0
-            )
-            2px,
-
-            rgba(
-                0,
-                0,
-                0,
-                0.13
-            )
-            3px
-
+            rgba(0, 0, 0, 0) 0px,
+            rgba(0, 0, 0, 0) 2px,
+            rgba(0, 0, 0, 0.13) 3px
         );
-
 }
 
 
-/*
-Green monitor tint over active GIF.
-*/
-
 .cell::after {
+    content: "";
 
-    content:
-        "";
+    position: absolute;
 
-    position:
-        absolute;
+    z-index: 2;
 
-    z-index:
-        2;
+    inset: 0;
 
-    inset:
-        0;
+    pointer-events: none;
 
-    pointer-events:
-        none;
-
-    opacity:
-        0;
+    opacity: 0;
 
     background:
-
         linear-gradient(
-
-            rgba(
-                0,
-                255,
-                0,
-                0.07
-            ),
-
-            rgba(
-                0,
-                15,
-                0,
-                0.25
-            )
-
+            rgba(0, 255, 0, 0.07),
+            rgba(0, 15, 0, 0.24)
         );
 
     transition:
-        opacity
-        0.18s
-        ease;
-
+        opacity 0.16s ease;
 }
 
 
 /* =========================================================
-   ACTIVE
+   ACTIVE CELLS
 ========================================================= */
 
 .cell.active {
-
     border-color:
         rgba(0, 255, 0, 0.98);
 
@@ -557,41 +420,27 @@ Green monitor tint over active GIF.
         rgba(0, 255, 0, 1);
 
     box-shadow:
-
         inset
         0 0 20px
         rgba(0, 255, 0, 0.44);
-
 }
 
 
 .cell.active::after {
-
-    opacity:
-        1;
-
+    opacity: 1;
 }
 
 
 .cell.active .text {
-
-    color:
-        #00ff00;
+    color: #00ff00;
 
     text-shadow:
-
-        0 0 4px
-        #000,
-
-        0 0 9px
-        #000,
-
+        0 0 4px #000,
+        0 0 9px #000,
         0 0 13px
         rgba(0, 255, 0, 1),
-
         0 0 28px
         rgba(0, 255, 0, 0.65);
-
 }
 
 
@@ -600,66 +449,38 @@ Green monitor tint over active GIF.
 ========================================================= */
 
 .cell.free {
-
-    cursor:
-        default;
-
-    opacity:
-        1;
+    cursor: default;
 
     background-image:
-
         radial-gradient(
-
             circle,
-
-            rgba(
-                0,
-                255,
-                0,
-                0.17
-            ),
-
-            rgba(
-                0,
-                0,
-                0,
-                0.7
-            )
-
+            rgba(0, 255, 0, 0.17),
+            rgba(0, 0, 0, 0.7)
         );
-
 }
 
 
 .cell.free .text {
+    color: #00ff00;
 
-    color:
-        #00ff00;
+    text-transform: uppercase;
 
-    text-transform:
-        uppercase;
-
-    letter-spacing:
-        0.04em;
-
+    letter-spacing: 0.04em;
 }
 
 
 /* =========================================================
-   HOVER — ONLY DEVICES WITH REAL HOVER
+   HOVER
 ========================================================= */
 
 @media (hover: hover) {
 
     .cell:not(.free):hover {
-
         background-color:
-            rgba(0, 255, 0, 0.15);
+            rgba(0, 255, 0, 0.14);
 
         border-color:
             rgba(0, 255, 0, 0.75);
-
     }
 
 }
@@ -670,66 +491,47 @@ Green monitor tint over active GIF.
 ========================================================= */
 
 .popup {
+    display: flex;
 
-    display:
-        flex;
+    position: fixed;
 
-    position:
-        fixed;
+    z-index: 1000;
 
-    z-index:
-        1000;
+    inset: 0;
 
-    inset:
-        0;
+    align-items: center;
 
-    align-items:
-        center;
+    justify-content: center;
 
-    justify-content:
-        center;
-
-    padding:
-        20px;
+    padding: 20px;
 
     background-color:
         rgba(0, 0, 0, 0.88);
 
-    visibility:
-        hidden;
+    visibility: hidden;
 
-    opacity:
-        0;
+    opacity: 0;
 
-    pointer-events:
-        none;
+    pointer-events: none;
 
     transition:
         opacity
         0.15s
         ease;
-
 }
 
 
 .popup.visible {
+    visibility: visible;
 
-    visibility:
-        visible;
+    opacity: 1;
 
-    opacity:
-        1;
-
-    pointer-events:
-        auto;
-
+    pointer-events: auto;
 }
 
 
 .popup-content {
-
-    position:
-        relative;
+    position: relative;
 
     width:
         min(
@@ -737,14 +539,11 @@ Green monitor tint over active GIF.
             500px
         );
 
-    padding:
-        22px;
+    padding: 22px;
 
-    text-align:
-        center;
+    text-align: center;
 
-    color:
-        #00ff00;
+    color: #00ff00;
 
     border:
         2px solid
@@ -756,203 +555,190 @@ Green monitor tint over active GIF.
     background-image:
         url("bg-lines1.jpeg");
 
-    background-size:
-        cover;
+    background-size: cover;
 
-    background-position:
-        center;
+    background-position: center;
 
-    background-blend-mode:
-        multiply;
+    background-blend-mode: multiply;
 
     box-shadow:
         0 0 50px
         rgba(0, 255, 0, 0.65);
-
 }
 
 
 #bingo-gif {
+    display: block;
 
-    display:
-        block;
+    max-width: 75%;
 
-    max-width:
-        75%;
+    height: auto;
 
-    height:
-        auto;
-
-    margin:
-        0 auto;
-
+    margin: 0 auto;
 }
 
 
 .popup-content h1 {
-
     margin:
         12px 0 0;
 
-    color:
-        #00ff00;
+    color: #00ff00;
 
-    font-size:
-        3rem;
+    font-size: 3rem;
 
     text-shadow:
         0 0 20px
         #00ff00;
-
 }
 
 
 .close-icon {
+    appearance: none;
 
-    appearance:
-        none;
+    position: absolute;
 
-    position:
-        absolute;
+    top: 8px;
 
-    top:
-        8px;
+    right: 10px;
 
-    right:
-        10px;
+    padding: 0;
 
-    padding:
-        0;
+    border: 0;
 
-    border:
-        0;
+    background: transparent;
 
-    background:
-        transparent;
-
-    color:
-        #00ff00;
+    color: #00ff00;
 
     font-family:
         'Green Screen',
         monospace;
 
-    font-size:
-        3.2rem;
+    font-size: 3.2rem;
 
-    line-height:
-        1;
+    line-height: 1;
 
-    cursor:
-        pointer;
+    cursor: pointer;
 
     text-shadow:
         0 0 12px
         #00ff00;
-
 }
 
 
 /* =========================================================
-   PHONE
+   MOBILE
 ========================================================= */
 
 @media screen and (max-width: 768px) {
 
     body {
-
         padding:
-            max(
-                5px,
-                env(safe-area-inset-top)
-            )
-
-            max(
-                5px,
-                env(safe-area-inset-right)
-            )
-
-            max(
-                5px,
-                env(safe-area-inset-bottom)
-            )
-
-            max(
-                5px,
-                env(safe-area-inset-left)
-            );
-
+            max(4px, env(safe-area-inset-top))
+            max(4px, env(safe-area-inset-right))
+            max(4px, env(safe-area-inset-bottom))
+            max(4px, env(safe-area-inset-left));
     }
 
 
     .wrap {
-
         height:
             calc(
-                100vh -
-                10px
+                100vh - 8px
             );
 
         height:
             calc(
-                100svh -
-                10px
+                100dvh - 8px
             );
-
     }
 
 
     .top-bar {
+        flex-basis: 46px;
 
-        flex-basis:
-            54px;
+        min-height: 46px;
 
+        align-items: center;
     }
 
 
     .terminal-label {
+        max-width: 62%;
 
-        max-width:
-            57%;
+        font-size: 7.5px;
 
-        font-size:
-            8px;
+        line-height: 0.95;
+    }
 
+
+    .status-light {
+        width: 7px;
+
+        height: 7px;
+
+        flex-basis: 7px;
     }
 
 
     .new-board {
-
-        font-size:
-            15px;
-
+        font-size: 14px;
     }
 
 
     .cell {
-
-        padding:
-            4px;
-
+        padding: 4px;
     }
 
 
     .text {
-
-        /*
-        Default phone size.
-
-        Longer cells are then individually
-        reduced by JS.
-        */
-
         font-size:
             clamp(
                 9px,
-                2.6vw,
+                2.55vw,
                 17px
             );
+    }
 
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media screen and (max-width: 420px) {
+
+    .top-bar {
+        flex-basis: 44px;
+
+        min-height: 44px;
+    }
+
+
+    .terminal-label {
+        font-size: 7px;
+
+        max-width: 60%;
+    }
+
+
+    .new-board {
+        font-size: 13px;
+    }
+
+
+    .cell {
+        padding: 3px;
+    }
+
+
+    .text {
+        font-size:
+            clamp(
+                8.5px,
+                2.45vw,
+                15px
+            );
     }
 
 }
