@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <!--
-    Shamelessly, overtly, and clumsily ripped off from
-    the great jP00p's Star Trek Bingo.
-
-    Thanks to those who ran so I could stumble.
+Shamelessly, overtly, and clumsily ripped off from the great jP00p's Star Trek Bingo.
+Thanks to those who ran so I could stumble.
 -->
 
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
 
     <title>X-Files Bingo</title>
@@ -18,6 +18,7 @@
     >
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
@@ -30,126 +31,117 @@
         type="text/css"
         href="greenscreen.css"
     >
+
 </head>
 
 
 <body>
 
-    <main class="wrap">
+<div class="wrap">
 
-        <header class="board-header">
-            <div class="terminal-meta">
-                <span class="status-light" aria-hidden="true"></span>
-                X-FILES // FIELD OBSERVATION PROTOCOL
-            </div>
+    <div class="top-bar">
 
-            <button
-                id="new-board"
-                class="new-board"
-                type="button"
-            >
-                New board
-            </button>
-        </header>
+        <div class="terminal-label">
+            <span class="status-light"></span>
+            <span>X-FILES // FIELD OBSERVATION PROTOCOL</span>
+        </div>
 
+        <button
+            id="new-board"
+            class="new-board"
+            type="button"
+        >
+            New board
+        </button>
 
-        <section class="content">
-
-            <div
-                class="bingo-board"
-                id="bingo-board"
-                aria-label="X-Files Bingo Board"
-            >
-
-                <button class="cell" type="button"><span class="text"></span></button>
-                <button class="cell" type="button"><span class="text"></span></button>
-                <button class="cell" type="button"><span class="text"></span></button>
-                <button class="cell" type="button"><span class="text"></span></button>
-                <button class="cell" type="button"><span class="text"></span></button>
-
-                <button class="cell" type="button"><span class="text"></span></button>
-                <button class="cell" type="button"><span class="text"></span></button>
-                <button class="cell" type="button"><span class="text"></span></button>
-                <button class="cell" type="button"><span class="text"></span></button>
-                <button class="cell" type="button"><span class="text"></span></button>
-
-                <button class="cell" type="button"><span class="text"></span></button>
-                <button class="cell" type="button"><span class="text"></span></button>
-
-                <button
-                    class="cell free active"
-                    id="free"
-                    type="button"
-                    aria-label="Free Space"
-                    disabled
-                >
-                    <span class="text">Free Space</span>
-                </button>
-
-                <button class="cell" type="button"><span class="text"></span></button>
-                <button class="cell" type="button"><span class="text"></span></button>
-
-                <button class="cell" type="button"><span class="text"></span></button>
-                <button class="cell" type="button"><span class="text"></span></button>
-                <button class="cell" type="button"><span class="text"></span></button>
-                <button class="cell" type="button"><span class="text"></span></button>
-                <button class="cell" type="button"><span class="text"></span></button>
-
-                <button class="cell" type="button"><span class="text"></span></button>
-                <button class="cell" type="button"><span class="text"></span></button>
-                <button class="cell" type="button"><span class="text"></span></button>
-                <button class="cell" type="button"><span class="text"></span></button>
-                <button class="cell" type="button"><span class="text"></span></button>
-
-            </div>
-
-        </section>
-
-    </main>
+    </div>
 
 
-    <div
-        id="bingo-popup"
-        class="popup"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="bingo-title"
-    >
+    <div class="content">
 
-        <div class="popup-content">
+        <div
+            class="bingo-board"
+            id="bingo-board"
+        >
+
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
 
             <button
-                id="close-popup"
-                class="close-icon"
+                class="cell free active"
+                id="free"
                 type="button"
-                aria-label="Close"
+                disabled
             >
-                X
+                <span class="text">Free Space</span>
             </button>
 
-            <img
-                id="bingo-gif"
-                src="bingo.gif"
-                alt="Bingo celebration"
-            >
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
 
-            <h1 id="bingo-title">Bingo!</h1>
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
+            <button class="cell" type="button"><span class="text"></span></button>
 
         </div>
 
     </div>
 
+</div>
+
+
+<div id="bingo-popup" class="popup">
+
+    <div class="popup-content">
+
+        <button
+            id="close-popup"
+            class="close-icon"
+            type="button"
+        >
+            X
+        </button>
+
+        <img
+            id="bingo-gif"
+            src="bingo.gif"
+            alt="Bingo Celebration"
+        >
+
+        <h1>Bingo!</h1>
+
+    </div>
+
+</div>
+
 
 <script>
 
-const API_KEY = "FR57D8JH3LYH";
+var apiKey = "FR57D8JH3LYH";
 
 
-/* =========================================================
-   SEARCH TERMS
-========================================================= */
+var searchTerms = [
 
-const searchTerms = [
     "Mulder",
     "Scully",
     "Alien",
@@ -159,14 +151,12 @@ const searchTerms = [
     "Skinner",
     "Mulder-and-Scully",
     "Spooky"
+
 ];
 
 
-/* =========================================================
-   BINGO CONTENT
-========================================================= */
+var stuff = [
 
-const stuff = [
     'Bat signal!',
     '"Mulder it\'s me"',
     '"Scully it\'s me"',
@@ -273,714 +263,953 @@ const stuff = [
     'CUT TO: Gun close-up',
     'Oozy goo',
     'Police radio chatter'
+
 ];
 
 
-/* =========================================================
-   DOM REFERENCES
-========================================================= */
-
-const board = document.getElementById("bingo-board");
-
-const cells = Array.from(
-    board.querySelectorAll(".cell")
-);
-
-const playableCells = cells.filter(
-    cell => cell.id !== "free"
-);
-
-const popup = document.getElementById("bingo-popup");
-
-const closePopupButton =
-    document.getElementById("close-popup");
-
-const newBoardButton =
-    document.getElementById("new-board");
+document.addEventListener("DOMContentLoaded", function () {
 
 
-/* =========================================================
-   STATE
-========================================================= */
-
-const triggeredBingos = {
-    rows: [],
-    columns: [],
-    diagonals: []
-};
+    var board =
+        document.getElementById("bingo-board");
 
 
-/*
-    Tenor cache.
-
-    One Tenor request can return several GIFs.
-
-    Instead of making a new network request every time
-    a square is clicked, returned GIFs go into this pool
-    and are reused before another request is necessary.
-*/
-
-let gifPool = [];
-
-let gifFetchPromise = null;
-
-
-/* =========================================================
-   GENERAL HELPERS
-========================================================= */
-
-function randomItem(array) {
-    return array[
-        Math.floor(Math.random() * array.length)
-    ];
-}
-
-
-function shuffle(array) {
-
-    const copy = [...array];
-
-    for (let i = copy.length - 1; i > 0; i--) {
-
-        const j =
-            Math.floor(Math.random() * (i + 1));
-
-        [copy[i], copy[j]] =
-            [copy[j], copy[i]];
-    }
-
-    return copy;
-}
-
-
-/* =========================================================
-   BOARD GENERATION
-========================================================= */
-
-function generateBoard() {
-
-    const shuffled = shuffle(stuff);
-
-    playableCells.forEach((cell, index) => {
-
-        const text =
-            cell.querySelector(".text");
-
-        text.textContent =
-            shuffled[index];
-
-        cell.classList.remove("active");
-
-        cell.style.backgroundImage = "none";
-
-        cell.removeAttribute("data-gif-request");
-
-        cell.setAttribute(
-            "aria-pressed",
-            "false"
+    var cells =
+        Array.prototype.slice.call(
+            board.querySelectorAll(".cell")
         );
-    });
+
+
+    var playableCells =
+        Array.prototype.slice.call(
+            board.querySelectorAll(".cell:not(#free)")
+        );
+
+
+    var popup =
+        document.getElementById("bingo-popup");
+
+
+    var closePopup =
+        document.getElementById("close-popup");
+
+
+    var newBoard =
+        document.getElementById("new-board");
+
+
+    var triggeredBingos = {
+
+        rows: [],
+        columns: [],
+        diagonals: []
+
+    };
 
 
     /*
-        Free Space stays permanently active.
+    =========================================================
+    RANDOMISE
+    =========================================================
     */
 
-    const free =
-        document.getElementById("free");
+    function shuffle(array) {
 
-    free.classList.add("active");
-
-    free.style.backgroundImage = "none";
+        var copy =
+            array.slice();
 
 
-    /*
-        Reset bingo detection.
-    */
+        for (
+            var i = copy.length - 1;
+            i > 0;
+            i--
+        ) {
 
-    triggeredBingos.rows = [];
-    triggeredBingos.columns = [];
-    triggeredBingos.diagonals = [];
-
-
-    /*
-        Wait until the browser has finished laying
-        out the new text, then fit it.
-    */
-
-    requestAnimationFrame(() => {
-        fitAllText();
-    });
-}
+            var j =
+                Math.floor(
+                    Math.random() * (i + 1)
+                );
 
 
-/* =========================================================
-   REACTIVE TEXT FITTING
-========================================================= */
+            var temp =
+                copy[i];
 
-/*
-    This measures every phrase against the ACTUAL
-    available space in its own square.
+            copy[i] =
+                copy[j];
 
-    Long text shrinks.
-    Short text stays large.
-
-    Binary search means we're not repeatedly stepping
-    through dozens of font sizes.
-*/
-
-function fitText(cell) {
-
-    const text =
-        cell.querySelector(".text");
-
-    if (!text) return;
-
-
-    /*
-        Clear previous inline font sizing first.
-    */
-
-    text.style.fontSize = "";
-
-
-    const availableWidth =
-        cell.clientWidth - 16;
-
-    const availableHeight =
-        cell.clientHeight - 14;
-
-
-    if (
-        availableWidth <= 0 ||
-        availableHeight <= 0
-    ) {
-        return;
-    }
-
-
-    /*
-        Upper size adapts naturally to cell size.
-    */
-
-    let low = 9;
-
-    let high = Math.min(
-        34,
-        cell.clientWidth * 0.16,
-        cell.clientHeight * 0.32
-    );
-
-    let best = low;
-
-
-    /*
-        Binary-search an appropriate font size.
-    */
-
-    for (let i = 0; i < 10; i++) {
-
-        const mid =
-            (low + high) / 2;
-
-        text.style.fontSize =
-            `${mid}px`;
-
-
-        const fits =
-            text.scrollWidth <= availableWidth &&
-            text.scrollHeight <= availableHeight;
-
-
-        if (fits) {
-
-            best = mid;
-            low = mid;
-
-        } else {
-
-            high = mid;
+            copy[j] =
+                temp;
 
         }
+
+
+        return copy;
+
     }
 
-
-    text.style.fontSize =
-        `${best}px`;
-}
-
-
-function fitAllText() {
-
-    cells.forEach(cell => {
-        fitText(cell);
-    });
-}
-
-
-/*
-    If browser dimensions change — rotation,
-    resize, mobile browser chrome, etc —
-    recalculate text sizing.
-*/
-
-let resizeTimer;
-
-window.addEventListener(
-    "resize",
-    () => {
-
-        clearTimeout(resizeTimer);
-
-        resizeTimer =
-            setTimeout(
-                fitAllText,
-                100
-            );
-    }
-);
-
-
-/*
-    ResizeObserver catches layout changes that aren't
-    necessarily traditional window resizes.
-*/
-
-if ("ResizeObserver" in window) {
-
-    const boardObserver =
-        new ResizeObserver(() => {
-            fitAllText();
-        });
-
-    boardObserver.observe(board);
-}
-
-
-/* =========================================================
-   TENOR GIF HANDLING
-========================================================= */
-
-function makeSearchURL() {
-
-    const searchTerm =
-        randomItem(searchTerms);
-
-    const query =
-        encodeURIComponent(
-            `${searchTerm} x-files`
-        );
-
-    return (
-        "https://api.tenor.com/v1/random" +
-        `?q=${query}` +
-        `&key=${API_KEY}` +
-        "&limit=5" +
-        "&contentfilter=off" +
-        "&locale=en_US"
-    );
-}
-
-
-/*
-    One network request gives us several GIF URLs.
-
-    They are saved into gifPool for future clicks.
-*/
-
-async function refillGifPool() {
 
     /*
-        If another cell already triggered a request,
-        share the same Promise rather than issuing
-        duplicate simultaneous requests.
+    =========================================================
+    TEXT FITTING
+    =========================================================
     */
 
-    if (gifFetchPromise) {
 
-        await gifFetchPromise;
-        return;
+    function fitText(cell) {
+
+
+        var text =
+            cell.querySelector(".text");
+
+
+        if (!text) {
+            return;
+        }
+
+
+        /*
+        Start from CSS size every time.
+        */
+
+        text.style.fontSize = "";
+
+
+        var maxWidth =
+            cell.clientWidth - 10;
+
+
+        var maxHeight =
+            cell.clientHeight - 10;
+
+
+        /*
+        Begin with whatever CSS naturally gave us.
+        */
+
+        var size =
+            parseFloat(
+                window
+                    .getComputedStyle(text)
+                    .fontSize
+            );
+
+
+        /*
+        Only shrink if we actually need to.
+        */
+
+        while (
+
+            (
+                text.scrollWidth > maxWidth ||
+                text.scrollHeight > maxHeight
+            )
+
+            &&
+
+            size > 8
+
+        ) {
+
+            size -= 0.5;
+
+            text.style.fontSize =
+                size + "px";
+
+        }
+
     }
 
 
-    gifFetchPromise = fetch(
-        makeSearchURL()
-    )
-
-        .then(response => {
-
-            if (!response.ok) {
-
-                throw new Error(
-                    `Tenor returned ${response.status}`
-                );
-            }
-
-            return response.json();
-        })
-
-        .then(data => {
-
-            if (!data.results) return;
+    function fitAllText() {
 
 
-            const urls =
-                data.results
-                    .map(result => {
+        for (
+            var i = 0;
+            i < cells.length;
+            i++
+        ) {
+
+            fitText(cells[i]);
+
+        }
+
+    }
+
+
+    /*
+    =========================================================
+    GENERATE BOARD
+    =========================================================
+    */
+
+
+    function generateBoard() {
+
+
+        var shuffled =
+            shuffle(stuff);
+
+
+        for (
+            var i = 0;
+            i < playableCells.length;
+            i++
+        ) {
+
+
+            var cell =
+                playableCells[i];
+
+
+            var text =
+                cell.querySelector(".text");
+
+
+            text.textContent =
+                shuffled[i];
+
+
+            cell.classList.remove(
+                "active"
+            );
+
+
+            cell.style.backgroundImage =
+                "none";
+
+
+            cell.setAttribute(
+                "aria-pressed",
+                "false"
+            );
+
+
+            cell.gifRequestNumber =
+                0;
+
+        }
+
+
+        var free =
+            document.getElementById("free");
+
+
+        free.classList.add(
+            "active"
+        );
+
+
+        triggeredBingos.rows = [];
+
+        triggeredBingos.columns = [];
+
+        triggeredBingos.diagonals = [];
+
+
+        /*
+        Let the browser draw everything first,
+        THEN shrink any troublesome phrases.
+        */
+
+        window.setTimeout(
+            fitAllText,
+            20
+        );
+
+    }
+
+
+    /*
+    =========================================================
+    GIF CACHE
+    =========================================================
+    */
+
+
+    var gifPool = [];
+
+    var fetchingGifs = false;
+
+    var waitingForGif = [];
+
+
+    function randomSearchTerm() {
+
+
+        return searchTerms[
+            Math.floor(
+                Math.random() *
+                searchTerms.length
+            )
+        ];
+
+    }
+
+
+    function getGif(callback) {
+
+
+        /*
+        Already have one?
+        Use it instantly.
+        */
+
+        if (gifPool.length > 0) {
+
+
+            callback(
+                gifPool.pop()
+            );
+
+
+            return;
+
+        }
+
+
+        /*
+        Queue this cell while an existing request
+        is already being made.
+        */
+
+        waitingForGif.push(
+            callback
+        );
+
+
+        if (fetchingGifs) {
+
+            return;
+
+        }
+
+
+        fetchingGifs = true;
+
+
+        var term =
+            randomSearchTerm();
+
+
+        var url =
+
+            "https://api.tenor.com/v1/random?q=" +
+
+            encodeURIComponent(
+                term + " x-files"
+            ) +
+
+            "&key=" +
+            apiKey +
+
+            "&limit=5" +
+
+            "&contentfilter=off" +
+
+            "&locale=en_US";
+
+
+        fetch(url)
+
+            .then(function (response) {
+
+                return response.json();
+
+            })
+
+            .then(function (data) {
+
+
+                var urls = [];
+
+
+                if (
+                    data &&
+                    data.results
+                ) {
+
+
+                    for (
+                        var i = 0;
+                        i < data.results.length;
+                        i++
+                    ) {
+
 
                         try {
 
-                            return (
-                                result
+
+                            urls.push(
+
+                                data
+                                    .results[i]
                                     .media[0]
                                     .tinygif
                                     .url
+
                             );
 
-                        } catch {
 
-                            return null;
+                        } catch (error) {
+
+                            /*
+                            Ignore malformed result.
+                            */
+
                         }
-                    })
-                    .filter(Boolean);
+
+                    }
+
+                }
 
 
-            gifPool.push(
-                ...shuffle(urls)
-            );
-        })
-
-        .catch(error => {
-
-            /*
-                GIF failure should never make
-                the bingo board itself fail.
-            */
-
-            console.warn(
-                "Couldn't load Tenor GIF:",
-                error
-            );
-        })
-
-        .finally(() => {
-
-            gifFetchPromise = null;
-        });
+                gifPool =
+                    shuffle(urls);
 
 
-    await gifFetchPromise;
-}
+                fetchingGifs =
+                    false;
 
 
-async function getGifURL() {
+                /*
+                Serve everyone currently waiting.
+                */
 
-    if (gifPool.length === 0) {
+                while (
+                    waitingForGif.length > 0
+                ) {
 
-        await refillGifPool();
+
+                    var cb =
+                        waitingForGif.shift();
+
+
+                    if (
+                        gifPool.length > 0
+                    ) {
+
+
+                        cb(
+                            gifPool.pop()
+                        );
+
+
+                    } else {
+
+
+                        cb(null);
+
+                    }
+
+                }
+
+            })
+
+            .catch(function (error) {
+
+
+                console.log(
+                    "Tenor GIF failed:",
+                    error
+                );
+
+
+                fetchingGifs =
+                    false;
+
+
+                while (
+                    waitingForGif.length > 0
+                ) {
+
+
+                    waitingForGif
+                        .shift()(null);
+
+                }
+
+            });
+
     }
 
 
-    if (gifPool.length === 0) {
-
-        return null;
-    }
-
-
-    return gifPool.pop();
-}
-
-
-/* =========================================================
-   CELL INTERACTION
-========================================================= */
-
-async function activateCell(cell) {
-
-    cell.classList.add("active");
-
-    cell.setAttribute(
-        "aria-pressed",
-        "true"
-    );
-
-
     /*
-        Give this request a unique ID.
-
-        If the user switches the square off before
-        Tenor responds, the stale result gets ignored.
+    =========================================================
+    CELL CLICKS
+    =========================================================
     */
 
-    const requestID =
-        crypto.randomUUID
-            ? crypto.randomUUID()
-            : `${Date.now()}-${Math.random()}`;
 
-
-    cell.dataset.gifRequest =
-        requestID;
-
-
-    /*
-        Bingo happens immediately.
-
-        We do NOT wait for the GIF.
-    */
-
-    checkForBingo();
-
-
-    const gifURL =
-        await getGifURL();
-
-
-    /*
-        Confirm square is STILL active and this is
-        STILL the latest request associated with it.
-    */
-
-    if (
-        !cell.classList.contains("active") ||
-        cell.dataset.gifRequest !== requestID
+    for (
+        var i = 0;
+        i < playableCells.length;
+        i++
     ) {
-        return;
+
+
+        playableCells[i]
+            .addEventListener(
+                "click",
+                function () {
+
+
+                    var cell =
+                        this;
+
+
+                    /*
+                    TURN OFF
+                    */
+
+
+                    if (
+                        cell.classList.contains(
+                            "active"
+                        )
+                    ) {
+
+
+                        cell.classList.remove(
+                            "active"
+                        );
+
+
+                        cell.style.backgroundImage =
+                            "none";
+
+
+                        cell.setAttribute(
+                            "aria-pressed",
+                            "false"
+                        );
+
+
+                        /*
+                        Invalidates any GIF still loading.
+                        */
+
+                        cell.gifRequestNumber++;
+
+
+                        return;
+
+                    }
+
+
+                    /*
+                    TURN ON
+                    */
+
+
+                    cell.classList.add(
+                        "active"
+                    );
+
+
+                    cell.setAttribute(
+                        "aria-pressed",
+                        "true"
+                    );
+
+
+                    /*
+                    Immediate interaction.
+                    Don't wait for GIF.
+                    */
+
+                    checkForBingo();
+
+
+                    cell.gifRequestNumber++;
+
+
+                    var thisRequest =
+                        cell.gifRequestNumber;
+
+
+                    getGif(
+                        function (gifUrl) {
+
+
+                            /*
+                            Cell may have been unticked
+                            while the GIF loaded.
+                            */
+
+
+                            if (
+
+                                !cell
+                                    .classList
+                                    .contains(
+                                        "active"
+                                    )
+
+                                ||
+
+                                cell.gifRequestNumber !==
+                                thisRequest
+
+                            ) {
+
+                                return;
+
+                            }
+
+
+                            if (gifUrl) {
+
+
+                                cell.style
+                                    .backgroundImage =
+
+                                    'url("' +
+                                    gifUrl +
+                                    '")';
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
     }
-
-
-    if (gifURL) {
-
-        cell.style.backgroundImage =
-            `url("${gifURL}")`;
-    }
-}
-
-
-function deactivateCell(cell) {
-
-    cell.classList.remove("active");
-
-    cell.style.backgroundImage =
-        "none";
-
-    cell.removeAttribute(
-        "data-gif-request"
-    );
-
-    cell.setAttribute(
-        "aria-pressed",
-        "false"
-    );
-}
-
-
-/*
-    One listener handles all 24 playable cells.
-*/
-
-board.addEventListener(
-    "click",
-    event => {
-
-        const cell =
-            event.target.closest(".cell");
-
-
-        if (
-            !cell ||
-            cell.id === "free"
-        ) {
-            return;
-        }
-
-
-        if (
-            cell.classList.contains("active")
-        ) {
-
-            deactivateCell(cell);
-
-        } else {
-
-            activateCell(cell);
-
-        }
-    }
-);
-
-
-/* =========================================================
-   BINGO CHECK
-========================================================= */
-
-function checkForBingo() {
-
-    const size = 5;
 
 
     /*
-        Rows + columns
+    =========================================================
+    BINGO
+    =========================================================
     */
 
-    for (let i = 0; i < size; i++) {
 
-        const row =
-            cells.slice(
-                i * size,
-                (i + 1) * size
-            );
+    function checkForBingo() {
+
+
+        var size = 5;
+
+
+        for (
+            var i = 0;
+            i < size;
+            i++
+        ) {
+
+
+            var row =
+                cells.slice(
+                    i * size,
+                    (i + 1) * size
+                );
+
+
+            var rowComplete =
+                row.every(
+                    function (cell) {
+
+                        return cell
+                            .classList
+                            .contains(
+                                "active"
+                            );
+
+                    }
+                );
+
+
+            if (
+
+                rowComplete
+
+                &&
+
+                triggeredBingos.rows
+                    .indexOf(i) === -1
+
+            ) {
+
+
+                triggeredBingos
+                    .rows
+                    .push(i);
+
+
+                showBingoPopup();
+
+
+                return;
+
+            }
+
+
+            var column =
+                cells.filter(
+                    function (
+                        cell,
+                        index
+                    ) {
+
+                        return (
+                            index %
+                            size ===
+                            i
+                        );
+
+                    }
+                );
+
+
+            var columnComplete =
+                column.every(
+                    function (cell) {
+
+                        return cell
+                            .classList
+                            .contains(
+                                "active"
+                            );
+
+                    }
+                );
+
+
+            if (
+
+                columnComplete
+
+                &&
+
+                triggeredBingos.columns
+                    .indexOf(i) === -1
+
+            ) {
+
+
+                triggeredBingos
+                    .columns
+                    .push(i);
+
+
+                showBingoPopup();
+
+
+                return;
+
+            }
+
+        }
+
+
+        var main =
+            [0, 6, 12, 18, 24];
 
 
         if (
-            row.every(
-                cell =>
-                    cell.classList.contains("active")
-            ) &&
-            !triggeredBingos.rows.includes(i)
+
+            main.every(
+                function (index) {
+
+                    return cells[index]
+                        .classList
+                        .contains(
+                            "active"
+                        );
+
+                }
+            )
+
+            &&
+
+            triggeredBingos.diagonals
+                .indexOf("main") === -1
+
         ) {
 
-            triggeredBingos.rows.push(i);
+
+            triggeredBingos
+                .diagonals
+                .push("main");
+
 
             showBingoPopup();
 
+
             return;
+
         }
 
 
-        const column =
-            cells.filter(
-                (_, index) =>
-                    index % size === i
-            );
+        var anti =
+            [4, 8, 12, 16, 20];
 
 
         if (
-            column.every(
-                cell =>
-                    cell.classList.contains("active")
-            ) &&
-            !triggeredBingos.columns.includes(i)
+
+            anti.every(
+                function (index) {
+
+                    return cells[index]
+                        .classList
+                        .contains(
+                            "active"
+                        );
+
+                }
+            )
+
+            &&
+
+            triggeredBingos.diagonals
+                .indexOf("anti") === -1
+
         ) {
 
-            triggeredBingos.columns.push(i);
+
+            triggeredBingos
+                .diagonals
+                .push("anti");
+
 
             showBingoPopup();
 
-            return;
         }
+
     }
 
 
     /*
-        Main diagonal
+    =========================================================
+    POPUP
+    =========================================================
     */
 
-    const mainDiagonal =
-        [0, 6, 12, 18, 24];
+
+    function showBingoPopup() {
 
 
-    if (
-        mainDiagonal.every(
-            index =>
-                cells[index]
-                    .classList
-                    .contains("active")
-        ) &&
-        !triggeredBingos
-            .diagonals
-            .includes("main")
-    ) {
+        popup.classList.add(
+            "visible"
+        );
 
-        triggeredBingos
-            .diagonals
-            .push("main");
-
-        showBingoPopup();
-
-        return;
     }
+
+
+    function hideBingoPopup() {
+
+
+        popup.classList.remove(
+            "visible"
+        );
+
+    }
+
+
+    closePopup.addEventListener(
+        "click",
+        hideBingoPopup
+    );
+
+
+    popup.addEventListener(
+        "click",
+        function (event) {
+
+
+            if (
+                event.target === popup
+            ) {
+
+                hideBingoPopup();
+
+            }
+
+        }
+    );
 
 
     /*
-        Opposite diagonal
+    =========================================================
+    NEW BOARD
+    =========================================================
     */
 
-    const antiDiagonal =
-        [4, 8, 12, 16, 20];
+
+    newBoard.addEventListener(
+        "click",
+        generateBoard
+    );
+
+
+    /*
+    =========================================================
+    RESIZE
+    =========================================================
+    */
+
+
+    var resizeTimer;
+
+
+    window.addEventListener(
+        "resize",
+        function () {
+
+
+            clearTimeout(
+                resizeTimer
+            );
+
+
+            resizeTimer =
+                setTimeout(
+                    fitAllText,
+                    100
+                );
+
+        }
+    );
+
+
+    /*
+    =========================================================
+    START
+    =========================================================
+    */
+
+
+    generateBoard();
+
+
+    /*
+    Font may finish loading after first sizing pass.
+    Resize again once fonts settle if supported.
+    */
 
 
     if (
-        antiDiagonal.every(
-            index =>
-                cells[index]
-                    .classList
-                    .contains("active")
-        ) &&
-        !triggeredBingos
-            .diagonals
-            .includes("anti")
+        document.fonts &&
+        document.fonts.ready
     ) {
 
-        triggeredBingos
-            .diagonals
-            .push("anti");
 
-        showBingoPopup();
+        document.fonts.ready.then(
+            function () {
+
+                fitAllText();
+
+            }
+        );
+
     }
-}
+
+});
+
+</script>
 
 
-/* =========================================================
-   POPUP
-========================================================= */
+</body>
 
-function showBingoPopup() {
-
-    popup.classList.add("visible");
-
-    closePopupButton.focus();
-}
-
-
-function hideBingoPopup() {
-
-    popup.classList.remove("visible");
-}
-
-
-closePopupButton.addEventListener(
-    "click",
-    hideBingoPopup
-);
-
-
-popup.addEventListener(
-    "click",
-    event => {
-
-        if (event.target === popup) {
-
-            hideBingoPopup();
-        }
-    }
-);
-
-
-document.addEventListener(
-    "keydown",
-    event => {
-
-        if (
-            event.key === "Escape" &&
-            popup.classList.contains("visible")
-        ) {
-
-            hideBingoPopup();
-        }
-    }
-);
-
-
-/* =========================================================
-   NEW BOARD
-====================================================
+</html>
