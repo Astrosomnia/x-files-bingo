@@ -1,8 +1,11 @@
 <!DOCTYPE html>
+<!-- Shamelessly, overtly, and clumsily ripped off from the great jP00p's Star Trek Bingo.
+Thanks to those who ran so I could stumble. -->
 
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <title>X-Files Bingo</title>
@@ -11,6 +14,10 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
         href="https://fonts.cdnfonts.com/css/green-screen"
@@ -22,22 +29,27 @@
         type="text/css"
         href="greenscreen.css"
     >
+
 </head>
 
 
 <body>
+
 
 <div class="wrap">
 
     <div class="top-bar">
 
         <div class="terminal-label">
+
             <span class="status-light"></span>
 
             <span>
                 X-FILES // FIELD OBSERVATION PROTOCOL
             </span>
+
         </div>
+
 
         <button
             id="new-board"
@@ -103,7 +115,10 @@
 </div>
 
 
-<div id="bingo-popup" class="popup">
+<div
+    id="bingo-popup"
+    class="popup"
+>
 
     <div class="popup-content">
 
@@ -129,6 +144,31 @@
 
 
 <script>
+
+
+/* =========================================================
+   SETTINGS
+========================================================= */
+
+
+var apiKey =
+    "FR57D8JH3LYH";
+
+
+var searchTerms = [
+
+    "Mulder",
+    "Scully",
+    "Alien",
+    "Cigarette Smoking Man",
+    "Creepy",
+    "Truth",
+    "Skinner",
+    "Mulder-and-Scully",
+    "Spooky"
+
+];
+
 
 var stuff = [
 
@@ -216,7 +256,7 @@ var stuff = [
     'Religious overtones',
     'Overt government conspiracy',
     'Humans are the real monsters',
-    'Mulder is lovin\' it',
+    'Mulder is lovin\'it',
     'This would flip modern science on its head',
     'Psychic powers',
     'Episode gets funny weird',
@@ -242,103 +282,206 @@ var stuff = [
 ];
 
 
+
 document.addEventListener(
     "DOMContentLoaded",
     function () {
 
+
         var board =
-            document.getElementById("bingo-board");
+            document.getElementById(
+                "bingo-board"
+            );
+
 
         var cells =
-            board.querySelectorAll(".cell");
+            Array.prototype.slice.call(
+                board.querySelectorAll(
+                    ".cell"
+                )
+            );
 
-        var playable =
-            board.querySelectorAll(".cell:not(#free)");
+
+        var playableCells =
+            Array.prototype.slice.call(
+                board.querySelectorAll(
+                    ".cell:not(#free)"
+                )
+            );
+
 
         var popup =
-            document.getElementById("bingo-popup");
+            document.getElementById(
+                "bingo-popup"
+            );
 
 
         var triggeredBingos = {
+
             rows: [],
+
             columns: [],
+
             diagonals: []
+
         };
 
 
-        function shuffledCopy(array) {
+
+        /* =================================================
+           SHUFFLE
+        ================================================= */
+
+
+        function shuffle(array) {
+
 
             var copy =
                 array.slice();
 
+
             for (
-                var i = copy.length - 1;
+                var i =
+                    copy.length - 1;
+
                 i > 0;
+
                 i--
             ) {
 
+
                 var j =
                     Math.floor(
-                        Math.random() * (i + 1)
+                        Math.random() *
+                        (i + 1)
                     );
+
 
                 var temp =
                     copy[i];
 
+
                 copy[i] =
                     copy[j];
 
+
                 copy[j] =
                     temp;
+
             }
 
+
             return copy;
+
         }
+
+
+
+        /* =================================================
+           TEXT FITTING
+
+           BIG FIRST.
+
+           Each phrase starts around 28px on a phone,
+           then ONLY that phrase shrinks if necessary.
+        ================================================= */
 
 
         function fitText(cell) {
 
+
             var text =
-                cell.querySelector(".text");
+                cell.querySelector(
+                    ".text"
+                );
+
 
             if (!text) {
                 return;
             }
 
+
             /*
-            START BIG.
+            Available cell dimensions.
             */
 
-            var size = 26;
+            var maxWidth =
+                cell.clientWidth - 10;
+
+
+            var maxHeight =
+                cell.clientHeight - 10;
+
+
+            /*
+            Start aggressively large.
+
+            Cell width limits it naturally.
+            */
+
+            var startSize =
+                Math.min(
+                    30,
+                    cell.clientWidth * 0.23,
+                    cell.clientHeight * 0.30
+                );
+
+
+            /*
+            Never begin smaller than 17px.
+            */
+
+            startSize =
+                Math.max(
+                    17,
+                    startSize
+                );
+
+
+            var size =
+                startSize;
+
 
             text.style.fontSize =
                 size + "px";
 
 
             /*
-            Only shrink THIS square if it overflows.
+            Shrink only until this phrase fits.
             */
 
             while (
-                size > 11 &&
+
                 (
-                    text.scrollHeight >
-                    cell.clientHeight - 12
-                    ||
                     text.scrollWidth >
-                    cell.clientWidth - 12
+                    maxWidth
+
+                    ||
+
+                    text.scrollHeight >
+                    maxHeight
                 )
+
+                &&
+
+                size > 10
+
             ) {
 
-                size -= 1;
+
+                size -= 0.5;
+
 
                 text.style.fontSize =
                     size + "px";
+
             }
+
         }
 
 
         function fitAllText() {
+
 
             for (
                 var i = 0;
@@ -346,286 +489,504 @@ document.addEventListener(
                 i++
             ) {
 
-                fitText(cells[i]);
+
+                fitText(
+                    cells[i]
+                );
+
             }
+
         }
+
+
+
+        /* =================================================
+           BOARD
+        ================================================= */
 
 
         function generateBoard() {
 
+
             var shuffled =
-                shuffledCopy(stuff);
+                shuffle(stuff);
 
 
             for (
                 var i = 0;
-                i < playable.length;
+                i < playableCells.length;
                 i++
             ) {
 
-                playable[i]
-                    .querySelector(".text")
+
+                var cell =
+                    playableCells[i];
+
+
+                cell
+                    .querySelector(
+                        ".text"
+                    )
                     .textContent =
                         shuffled[i];
 
-                playable[i]
-                    .classList
-                    .remove("active");
 
-                playable[i]
-                    .style
-                    .backgroundImage =
-                        "none";
+                cell.classList.remove(
+                    "active"
+                );
+
+
+                cell.style.backgroundImage =
+                    "none";
+
+
+                cell.gifRequestNumber =
+                    0;
+
             }
 
 
             document
-                .getElementById("free")
+                .getElementById(
+                    "free"
+                )
                 .classList
-                .add("active");
+                .add(
+                    "active"
+                );
 
 
             triggeredBingos.rows = [];
+
             triggeredBingos.columns = [];
+
             triggeredBingos.diagonals = [];
 
 
-            setTimeout(
+            window.setTimeout(
                 fitAllText,
-                50
+                40
             );
+
         }
+
+
+
+        /* =================================================
+           GIF CACHE
+        ================================================= */
+
+
+        var gifPool = [];
+
+        var gifRequestRunning =
+            false;
+
+        var gifCallbacks =
+            [];
+
+
+        function fetchGifs() {
+
+
+            if (
+                gifRequestRunning
+            ) {
+                return;
+            }
+
+
+            gifRequestRunning =
+                true;
+
+
+            var term =
+                searchTerms[
+                    Math.floor(
+                        Math.random() *
+                        searchTerms.length
+                    )
+                ];
+
+
+            /*
+            IMPORTANT:
+
+            Correct Tenor endpoint:
+            g.tenor.com
+
+            not api.tenor.com
+            */
+
+
+            var url =
+
+                "https://g.tenor.com/v1/random" +
+
+                "?q=" +
+
+                encodeURIComponent(
+                    term + " x-files"
+                ) +
+
+                "&key=" +
+
+                encodeURIComponent(
+                    apiKey
+                ) +
+
+                "&limit=8" +
+
+                "&media_filter=minimal" +
+
+                "&contentfilter=off" +
+
+                "&locale=en_US";
+
+
+            fetch(url)
+
+                .then(
+                    function (response) {
+
+
+                        if (
+                            !response.ok
+                        ) {
+
+
+                            throw new Error(
+                                "Tenor HTTP " +
+                                response.status
+                            );
+
+                        }
+
+
+                        return response.json();
+
+                    }
+                )
+
+
+                .then(
+                    function (data) {
+
+
+                        var newGifs =
+                            [];
+
+
+                        if (
+                            data &&
+                            data.results
+                        ) {
+
+
+                            for (
+                                var i = 0;
+                                i < data.results.length;
+                                i++
+                            ) {
+
+
+                                var result =
+                                    data.results[i];
+
+
+                                try {
+
+
+                                    var gif =
+
+                                        result
+                                            .media[0]
+                                            .tinygif
+                                            .url;
+
+
+                                    if (gif) {
+
+
+                                        newGifs.push(
+                                            gif
+                                        );
+
+                                    }
+
+
+                                } catch (e) {
+
+
+                                    /*
+                                    Skip bad result.
+                                    */
+
+
+                                }
+
+                            }
+
+                        }
+
+
+                        gifPool =
+                            gifPool.concat(
+                                shuffle(
+                                    newGifs
+                                )
+                            );
+
+
+                        gifRequestRunning =
+                            false;
+
+
+                        serveGifCallbacks();
+
+                    }
+                )
+
+
+                .catch(
+                    function (error) {
+
+
+                        console.error(
+                            "TENOR ERROR:",
+                            error
+                        );
+
+
+                        gifRequestRunning =
+                            false;
+
+
+                        /*
+                        Still release queued clicks.
+                        */
+
+
+                        while (
+                            gifCallbacks.length
+                        ) {
+
+
+                            gifCallbacks
+                                .shift()(null);
+
+                        }
+
+                    }
+                );
+
+        }
+
+
+
+        function serveGifCallbacks() {
+
+
+            while (
+
+                gifCallbacks.length >
+
+                0
+
+                &&
+
+                gifPool.length >
+
+                0
+
+            ) {
+
+
+                var callback =
+                    gifCallbacks.shift();
+
+
+                callback(
+                    gifPool.pop()
+                );
+
+            }
+
+
+            /*
+            If people clicked more cells than
+            the current batch supplied,
+            fetch another batch.
+            */
+
+
+            if (
+                gifCallbacks.length >
+                0
+            ) {
+
+
+                fetchGifs();
+
+            }
+
+        }
+
+
+
+        function getGif(callback) {
+
+
+            if (
+                gifPool.length >
+                0
+            ) {
+
+
+                callback(
+                    gifPool.pop()
+                );
+
+
+                /*
+                Quietly refill before completely empty.
+                */
+
+
+                if (
+                    gifPool.length <
+                    3
+                ) {
+
+
+                    fetchGifs();
+
+                }
+
+
+                return;
+
+            }
+
+
+            gifCallbacks.push(
+                callback
+            );
+
+
+            fetchGifs();
+
+        }
+
+
+
+        /* =================================================
+           CELL INTERACTION
+        ================================================= */
 
 
         for (
             var i = 0;
-            i < playable.length;
+            i < playableCells.length;
             i++
         ) {
 
-            playable[i]
+
+            playableCells[i]
                 .addEventListener(
                     "click",
                     function () {
 
+
+                        var cell =
+                            this;
+
+
+                        /*
+                        OFF
+                        */
+
+
                         if (
-                            this.classList
-                                .contains("active")
+                            cell.classList
+                                .contains(
+                                    "active"
+                                )
                         ) {
 
-                            this.classList
-                                .remove("active");
 
-                            this.style
+                            cell.classList
+                                .remove(
+                                    "active"
+                                );
+
+
+                            cell.style
                                 .backgroundImage =
                                     "none";
 
-                        } else {
 
-                            this.classList
-                                .add("active");
+                            cell.gifRequestNumber++;
 
-                            checkForBingo();
+
+                            return;
+
                         }
-                    }
-                );
-        }
 
 
-        function checkForBingo() {
 
-            var size = 5;
-
-            var boardCells =
-                Array.prototype.slice.call(
-                    cells
-                );
+                        /*
+                        ON
+                        */
 
 
-            for (
-                var i = 0;
-                i < size;
-                i++
-            ) {
-
-                var row =
-                    boardCells.slice(
-                        i * size,
-                        (i + 1) * size
-                    );
+                        cell.classList.add(
+                            "active"
+                        );
 
 
-                var rowDone =
-                    row.every(
-                        function (cell) {
-                            return cell
-                                .classList
-                                .contains("active");
-                        }
-                    );
+                        checkForBingo();
 
 
-                if (
-                    rowDone &&
-                    triggeredBingos.rows
-                        .indexOf(i) === -1
-                ) {
-
-                    triggeredBingos.rows.push(i);
-
-                    showBingo();
-
-                    return;
-                }
+                        cell.gifRequestNumber++;
 
 
-                var column = [];
+                        var requestNumber =
+                            cell.gifRequestNumber;
 
 
-                for (
-                    var j = i;
-                    j < 25;
-                    j += 5
-                ) {
-
-                    column.push(
-                        boardCells[j]
-                    );
-                }
+                        getGif(
+                            function (gifUrl) {
 
 
-                var columnDone =
-                    column.every(
-                        function (cell) {
-                            return cell
-                                .classList
-                                .contains("active");
-                        }
-                    );
+                                /*
+                                Cell may have been turned
+                                off while GIF was loading.
+                                */
 
 
-                if (
-                    columnDone &&
-                    triggeredBingos.columns
-                        .indexOf(i) === -1
-                ) {
+                                if (
 
-                    triggeredBingos.columns.push(i);
+                                    !cell.classList
+                                        .contains(
+                                            "active"
+                                        )
 
-                    showBingo();
+                                    ||
 
-                    return;
-                }
-            }
+                                    cell.gifRequestNumber !==
+                                    requestNumber
 
-
-            var main =
-                [0, 6, 12, 18, 24];
+                                ) {
 
 
-            if (
-                main.every(
-                    function (index) {
+                                    return;
 
-                        return boardCells[index]
-                            .classList
-                            .contains("active");
-                    }
-                )
-            ) {
-
-                if (
-                    triggeredBingos.diagonals
-                        .indexOf("main") === -1
-                ) {
-
-                    triggeredBingos.diagonals
-                        .push("main");
-
-                    showBingo();
-
-                    return;
-                }
-            }
+                                }
 
 
-            var anti =
-                [4, 8, 12, 16, 20];
+                                if (gifUrl) {
 
 
-            if (
-                anti.every(
-                    function (index) {
-
-                        return boardCells[index]
-                            .classList
-                            .contains("active");
-                    }
-                )
-            ) {
-
-                if (
-                    triggeredBingos.diagonals
-                        .indexOf("anti") === -1
-                ) {
-
-                    triggeredBingos.diagonals
-                        .push("anti");
-
-                    showBingo();
-                }
-            }
-        }
-
-
-        function showBingo() {
-
-            popup.classList.add(
-                "visible"
-            );
-        }
-
-
-        document
-            .getElementById("close-popup")
-            .addEventListener(
-                "click",
-                function () {
-
-                    popup.classList.remove(
-                        "visible"
-                    );
-                }
-            );
-
-
-        document
-            .getElementById("new-board")
-            .addEventListener(
-                "click",
-                generateBoard
-            );
-
-
-        window.addEventListener(
-            "resize",
-            function () {
-
-                setTimeout(
-                    fitAllText,
-                    50
-                );
-            }
-        );
-
-
-        generateBoard();
-
-    }
-);
-
-</script>
-
-</body>
-
-</html>
+                                    cell.style
+    
