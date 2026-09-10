@@ -1,11 +1,8 @@
 <!DOCTYPE html>
-<!-- Shamelessly, overtly, and clumsily ripped off from the great jP00p's Star Trek Bingo.
-Thanks to those who ran so I could stumble. -->
 
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
 
     <title>X-Files Bingo</title>
@@ -14,10 +11,6 @@ Thanks to those who ran so I could stumble. -->
         name="viewport"
         content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     >
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
         href="https://fonts.cdnfonts.com/css/green-screen"
@@ -29,27 +22,22 @@ Thanks to those who ran so I could stumble. -->
         type="text/css"
         href="greenscreen.css"
     >
-
 </head>
 
 
 <body>
-
 
 <div class="wrap">
 
     <div class="top-bar">
 
         <div class="terminal-label">
-
             <span class="status-light"></span>
 
             <span>
                 X-FILES // FIELD OBSERVATION PROTOCOL
             </span>
-
         </div>
-
 
         <button
             id="new-board"
@@ -115,10 +103,7 @@ Thanks to those who ran so I could stumble. -->
 </div>
 
 
-<div
-    id="bingo-popup"
-    class="popup"
->
+<div id="bingo-popup" class="popup">
 
     <div class="popup-content">
 
@@ -144,31 +129,6 @@ Thanks to those who ran so I could stumble. -->
 
 
 <script>
-
-
-/* =========================================================
-   SETTINGS
-========================================================= */
-
-
-var apiKey =
-    "FR57D8JH3LYH";
-
-
-var searchTerms = [
-
-    "Mulder",
-    "Scully",
-    "Alien",
-    "Cigarette Smoking Man",
-    "Creepy",
-    "Truth",
-    "Skinner",
-    "Mulder-and-Scully",
-    "Spooky"
-
-];
-
 
 var stuff = [
 
@@ -256,7 +216,7 @@ var stuff = [
     'Religious overtones',
     'Overt government conspiracy',
     'Humans are the real monsters',
-    'Mulder is lovin\'it',
+    'Mulder is lovin\' it',
     'This would flip modern science on its head',
     'Psychic powers',
     'Episode gets funny weird',
@@ -282,206 +242,103 @@ var stuff = [
 ];
 
 
-
 document.addEventListener(
     "DOMContentLoaded",
     function () {
 
-
         var board =
-            document.getElementById(
-                "bingo-board"
-            );
-
+            document.getElementById("bingo-board");
 
         var cells =
-            Array.prototype.slice.call(
-                board.querySelectorAll(
-                    ".cell"
-                )
-            );
+            board.querySelectorAll(".cell");
 
-
-        var playableCells =
-            Array.prototype.slice.call(
-                board.querySelectorAll(
-                    ".cell:not(#free)"
-                )
-            );
-
+        var playable =
+            board.querySelectorAll(".cell:not(#free)");
 
         var popup =
-            document.getElementById(
-                "bingo-popup"
-            );
+            document.getElementById("bingo-popup");
 
 
         var triggeredBingos = {
-
             rows: [],
-
             columns: [],
-
             diagonals: []
-
         };
 
 
-
-        /* =================================================
-           SHUFFLE
-        ================================================= */
-
-
-        function shuffle(array) {
-
+        function shuffledCopy(array) {
 
             var copy =
                 array.slice();
 
-
             for (
-                var i =
-                    copy.length - 1;
-
+                var i = copy.length - 1;
                 i > 0;
-
                 i--
             ) {
 
-
                 var j =
                     Math.floor(
-                        Math.random() *
-                        (i + 1)
+                        Math.random() * (i + 1)
                     );
-
 
                 var temp =
                     copy[i];
 
-
                 copy[i] =
                     copy[j];
 
-
                 copy[j] =
                     temp;
-
             }
 
-
             return copy;
-
         }
-
-
-
-        /* =================================================
-           TEXT FITTING
-
-           BIG FIRST.
-
-           Each phrase starts around 28px on a phone,
-           then ONLY that phrase shrinks if necessary.
-        ================================================= */
 
 
         function fitText(cell) {
 
-
             var text =
-                cell.querySelector(
-                    ".text"
-                );
-
+                cell.querySelector(".text");
 
             if (!text) {
                 return;
             }
 
-
             /*
-            Available cell dimensions.
+            START BIG.
             */
 
-            var maxWidth =
-                cell.clientWidth - 10;
-
-
-            var maxHeight =
-                cell.clientHeight - 10;
-
-
-            /*
-            Start aggressively large.
-
-            Cell width limits it naturally.
-            */
-
-            var startSize =
-                Math.min(
-                    30,
-                    cell.clientWidth * 0.23,
-                    cell.clientHeight * 0.30
-                );
-
-
-            /*
-            Never begin smaller than 17px.
-            */
-
-            startSize =
-                Math.max(
-                    17,
-                    startSize
-                );
-
-
-            var size =
-                startSize;
-
+            var size = 26;
 
             text.style.fontSize =
                 size + "px";
 
 
             /*
-            Shrink only until this phrase fits.
+            Only shrink THIS square if it overflows.
             */
 
             while (
-
+                size > 11 &&
                 (
-                    text.scrollWidth >
-                    maxWidth
-
-                    ||
-
                     text.scrollHeight >
-                    maxHeight
+                    cell.clientHeight - 12
+                    ||
+                    text.scrollWidth >
+                    cell.clientWidth - 12
                 )
-
-                &&
-
-                size > 10
-
             ) {
 
-
-                size -= 0.5;
-
+                size -= 1;
 
                 text.style.fontSize =
                     size + "px";
-
             }
-
         }
 
 
         function fitAllText() {
-
 
             for (
                 var i = 0;
@@ -489,504 +346,286 @@ document.addEventListener(
                 i++
             ) {
 
-
-                fitText(
-                    cells[i]
-                );
-
+                fitText(cells[i]);
             }
-
         }
-
-
-
-        /* =================================================
-           BOARD
-        ================================================= */
 
 
         function generateBoard() {
 
-
             var shuffled =
-                shuffle(stuff);
+                shuffledCopy(stuff);
 
 
             for (
                 var i = 0;
-                i < playableCells.length;
+                i < playable.length;
                 i++
             ) {
 
-
-                var cell =
-                    playableCells[i];
-
-
-                cell
-                    .querySelector(
-                        ".text"
-                    )
+                playable[i]
+                    .querySelector(".text")
                     .textContent =
                         shuffled[i];
 
+                playable[i]
+                    .classList
+                    .remove("active");
 
-                cell.classList.remove(
-                    "active"
-                );
-
-
-                cell.style.backgroundImage =
-                    "none";
-
-
-                cell.gifRequestNumber =
-                    0;
-
+                playable[i]
+                    .style
+                    .backgroundImage =
+                        "none";
             }
 
 
             document
-                .getElementById(
-                    "free"
-                )
+                .getElementById("free")
                 .classList
-                .add(
-                    "active"
-                );
+                .add("active");
 
 
             triggeredBingos.rows = [];
-
             triggeredBingos.columns = [];
-
             triggeredBingos.diagonals = [];
 
 
-            window.setTimeout(
+            setTimeout(
                 fitAllText,
-                40
+                50
             );
-
         }
-
-
-
-        /* =================================================
-           GIF CACHE
-        ================================================= */
-
-
-        var gifPool = [];
-
-        var gifRequestRunning =
-            false;
-
-        var gifCallbacks =
-            [];
-
-
-        function fetchGifs() {
-
-
-            if (
-                gifRequestRunning
-            ) {
-                return;
-            }
-
-
-            gifRequestRunning =
-                true;
-
-
-            var term =
-                searchTerms[
-                    Math.floor(
-                        Math.random() *
-                        searchTerms.length
-                    )
-                ];
-
-
-            /*
-            IMPORTANT:
-
-            Correct Tenor endpoint:
-            g.tenor.com
-
-            not api.tenor.com
-            */
-
-
-            var url =
-
-                "https://g.tenor.com/v1/random" +
-
-                "?q=" +
-
-                encodeURIComponent(
-                    term + " x-files"
-                ) +
-
-                "&key=" +
-
-                encodeURIComponent(
-                    apiKey
-                ) +
-
-                "&limit=8" +
-
-                "&media_filter=minimal" +
-
-                "&contentfilter=off" +
-
-                "&locale=en_US";
-
-
-            fetch(url)
-
-                .then(
-                    function (response) {
-
-
-                        if (
-                            !response.ok
-                        ) {
-
-
-                            throw new Error(
-                                "Tenor HTTP " +
-                                response.status
-                            );
-
-                        }
-
-
-                        return response.json();
-
-                    }
-                )
-
-
-                .then(
-                    function (data) {
-
-
-                        var newGifs =
-                            [];
-
-
-                        if (
-                            data &&
-                            data.results
-                        ) {
-
-
-                            for (
-                                var i = 0;
-                                i < data.results.length;
-                                i++
-                            ) {
-
-
-                                var result =
-                                    data.results[i];
-
-
-                                try {
-
-
-                                    var gif =
-
-                                        result
-                                            .media[0]
-                                            .tinygif
-                                            .url;
-
-
-                                    if (gif) {
-
-
-                                        newGifs.push(
-                                            gif
-                                        );
-
-                                    }
-
-
-                                } catch (e) {
-
-
-                                    /*
-                                    Skip bad result.
-                                    */
-
-
-                                }
-
-                            }
-
-                        }
-
-
-                        gifPool =
-                            gifPool.concat(
-                                shuffle(
-                                    newGifs
-                                )
-                            );
-
-
-                        gifRequestRunning =
-                            false;
-
-
-                        serveGifCallbacks();
-
-                    }
-                )
-
-
-                .catch(
-                    function (error) {
-
-
-                        console.error(
-                            "TENOR ERROR:",
-                            error
-                        );
-
-
-                        gifRequestRunning =
-                            false;
-
-
-                        /*
-                        Still release queued clicks.
-                        */
-
-
-                        while (
-                            gifCallbacks.length
-                        ) {
-
-
-                            gifCallbacks
-                                .shift()(null);
-
-                        }
-
-                    }
-                );
-
-        }
-
-
-
-        function serveGifCallbacks() {
-
-
-            while (
-
-                gifCallbacks.length >
-
-                0
-
-                &&
-
-                gifPool.length >
-
-                0
-
-            ) {
-
-
-                var callback =
-                    gifCallbacks.shift();
-
-
-                callback(
-                    gifPool.pop()
-                );
-
-            }
-
-
-            /*
-            If people clicked more cells than
-            the current batch supplied,
-            fetch another batch.
-            */
-
-
-            if (
-                gifCallbacks.length >
-                0
-            ) {
-
-
-                fetchGifs();
-
-            }
-
-        }
-
-
-
-        function getGif(callback) {
-
-
-            if (
-                gifPool.length >
-                0
-            ) {
-
-
-                callback(
-                    gifPool.pop()
-                );
-
-
-                /*
-                Quietly refill before completely empty.
-                */
-
-
-                if (
-                    gifPool.length <
-                    3
-                ) {
-
-
-                    fetchGifs();
-
-                }
-
-
-                return;
-
-            }
-
-
-            gifCallbacks.push(
-                callback
-            );
-
-
-            fetchGifs();
-
-        }
-
-
-
-        /* =================================================
-           CELL INTERACTION
-        ================================================= */
 
 
         for (
             var i = 0;
-            i < playableCells.length;
+            i < playable.length;
             i++
         ) {
 
-
-            playableCells[i]
+            playable[i]
                 .addEventListener(
                     "click",
                     function () {
 
-
-                        var cell =
-                            this;
-
-
-                        /*
-                        OFF
-                        */
-
-
                         if (
-                            cell.classList
-                                .contains(
-                                    "active"
-                                )
+                            this.classList
+                                .contains("active")
                         ) {
 
+                            this.classList
+                                .remove("active");
 
-                            cell.classList
-                                .remove(
-                                    "active"
-                                );
-
-
-                            cell.style
+                            this.style
                                 .backgroundImage =
                                     "none";
 
+                        } else {
 
-                            cell.gifRequestNumber++;
+                            this.classList
+                                .add("active");
 
-
-                            return;
-
+                            checkForBingo();
                         }
+                    }
+                );
+        }
 
 
+        function checkForBingo() {
 
-                        /*
-                        ON
-                        */
+            var size = 5;
 
-
-                        cell.classList.add(
-                            "active"
-                        );
-
-
-                        checkForBingo();
+            var boardCells =
+                Array.prototype.slice.call(
+                    cells
+                );
 
 
-                        cell.gifRequestNumber++;
+            for (
+                var i = 0;
+                i < size;
+                i++
+            ) {
+
+                var row =
+                    boardCells.slice(
+                        i * size,
+                        (i + 1) * size
+                    );
 
 
-                        var requestNumber =
-                            cell.gifRequestNumber;
+                var rowDone =
+                    row.every(
+                        function (cell) {
+                            return cell
+                                .classList
+                                .contains("active");
+                        }
+                    );
 
 
-                        getGif(
-                            function (gifUrl) {
+                if (
+                    rowDone &&
+                    triggeredBingos.rows
+                        .indexOf(i) === -1
+                ) {
+
+                    triggeredBingos.rows.push(i);
+
+                    showBingo();
+
+                    return;
+                }
 
 
-                                /*
-                                Cell may have been turned
-                                off while GIF was loading.
-                                */
+                var column = [];
 
 
-                                if (
+                for (
+                    var j = i;
+                    j < 25;
+                    j += 5
+                ) {
 
-                                    !cell.classList
-                                        .contains(
-                                            "active"
-                                        )
-
-                                    ||
-
-                                    cell.gifRequestNumber !==
-                                    requestNumber
-
-                                ) {
+                    column.push(
+                        boardCells[j]
+                    );
+                }
 
 
-                                    return;
+                var columnDone =
+                    column.every(
+                        function (cell) {
+                            return cell
+                                .classList
+                                .contains("active");
+                        }
+                    );
 
-                                }
+
+                if (
+                    columnDone &&
+                    triggeredBingos.columns
+                        .indexOf(i) === -1
+                ) {
+
+                    triggeredBingos.columns.push(i);
+
+                    showBingo();
+
+                    return;
+                }
+            }
 
 
-                                if (gifUrl) {
+            var main =
+                [0, 6, 12, 18, 24];
 
 
-                                    cell.style
-    
+            if (
+                main.every(
+                    function (index) {
+
+                        return boardCells[index]
+                            .classList
+                            .contains("active");
+                    }
+                )
+            ) {
+
+                if (
+                    triggeredBingos.diagonals
+                        .indexOf("main") === -1
+                ) {
+
+                    triggeredBingos.diagonals
+                        .push("main");
+
+                    showBingo();
+
+                    return;
+                }
+            }
+
+
+            var anti =
+                [4, 8, 12, 16, 20];
+
+
+            if (
+                anti.every(
+                    function (index) {
+
+                        return boardCells[index]
+                            .classList
+                            .contains("active");
+                    }
+                )
+            ) {
+
+                if (
+                    triggeredBingos.diagonals
+                        .indexOf("anti") === -1
+                ) {
+
+                    triggeredBingos.diagonals
+                        .push("anti");
+
+                    showBingo();
+                }
+            }
+        }
+
+
+        function showBingo() {
+
+            popup.classList.add(
+                "visible"
+            );
+        }
+
+
+        document
+            .getElementById("close-popup")
+            .addEventListener(
+                "click",
+                function () {
+
+                    popup.classList.remove(
+                        "visible"
+                    );
+                }
+            );
+
+
+        document
+            .getElementById("new-board")
+            .addEventListener(
+                "click",
+                generateBoard
+            );
+
+
+        window.addEventListener(
+            "resize",
+            function () {
+
+                setTimeout(
+                    fitAllText,
+                    50
+                );
+            }
+        );
+
+
+        generateBoard();
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>
